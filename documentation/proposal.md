@@ -39,6 +39,7 @@ MongoDB - will have separate collections for user, reviews and coffee shops
 ### RESTful Routing
 
 **Users:**
+
 POST "users/register"  
 Request: {email, password}  
 Response: {user}
@@ -60,6 +61,7 @@ Request: {token (header) , id (request params)}
 Response: {user}
 
 **Reviews:**
+
 GET "reviews"  
 Request : {query parameters for filter}  
 Response: array of reviews
