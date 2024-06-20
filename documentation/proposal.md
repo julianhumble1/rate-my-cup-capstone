@@ -27,8 +27,10 @@ It can be difficult if you are in a place you do not know well, and want to get 
 ### Architecture
 **Front-end:**
 React - will have components for registration & login screens, as well as search page, add/edit user reviews, and admin panel for admins. Will make HTTP request to back-end
+
 **Back-end:**
 Node.js/Express - handles CRUD requests for users, reviews and coffee shops. Also handles authentication of users, and handles search requests with different filters
+
 **Database:**
 MongoDB - will have separate collections for user, reviews and coffee shops
 
@@ -37,68 +39,71 @@ MongoDB - will have separate collections for user, reviews and coffee shops
 ### RESTful Routing
 
 **Users:**
-POST "users/register"
-Request: {email, password}
+POST "users/register"  
+Request: {email, password}  
 Response: {user}
 
-POST "users/login"
-Request: {email, password}
+POST "users/login"  
+Request: {email, password}  
 Response: {role, id, token}
 
-GET "users/:id"
-Request: {token (header) , id (request params)}
+GET "users/:id"  
+Request: {token (header) , id (request params)}  
 Response: {user}
 
-PUT "users/:id"
-Request: {token (header) , id (request params), updated details}
-Response {user}
+PUT "users/:id"  
+Request: {token (header) , id (request params), updated details}  
+Response {user}  
 
-DELETE "users/:id"
-Request: {token (header) , id (request params)}
+DELETE "users/:id"  
+Request: {token (header) , id (request params)}  
 Response: {user}
 
 **Reviews:**
-GET "reviews"
-Request : {query parameters for filter}
+GET "reviews"  
+Request : {query parameters for filter}  
 Response: array of reviews
 
-POST "reviews"
-Request: {token, review details (type, rating, price, comments)}
+POST "reviews"  
+Request: {token, review details (type, rating, price, comments)}  
 Response: new review object
 
-PUT "reviews/:id"
-Request: {token, id, updated review details (type, rating, price, comments)}
+PUT "reviews/:id"  
+Request: {token, id, updated review details (type, rating, price, comments)}  
 Response: updated review object
 
-DELETE
-Request: {token, id}
+DELETE "reviews/:id"  
+Request: {token, id}  
 Response: success message
 
 **Coffee shops:**
 
-GET "coffee-shops"
-Request: no headers or payload required
+GET "coffee-shops"  
+Request: no headers or payload required  
 Response: array of coffee shops with general details
 
-GET "coffee-shops/:id
-Request: {id from parameters}
+GET "coffee-shops/:id  
+Request: {id from parameters}  
 Response: coffee shop object with full details and reviews
 
 ### Technologies
 
-Front-end: React, HTML, CSS, JavaScript
-Back-end: Node.js, Express
-Database: MongoDB
-Authentication: JWT
-Dependencies: Axios, Mongoose, bcrypt
-Testing: vitest, mocha, chai, react-testing-library
-
+* Front-end: React, HTML, CSS, JavaScript
+* Back-end: Node.js, Express
+* Database: MongoDB
+* Authentication: JWT
+* Dependencies: Axios, Mongoose, bcrypt
+* Testing: vitest, mocha, chai, react-testing-library
+  
 External API calls:
-Trustpilot Categories API for all coffee shops
-Trustpilot Business Unit company logo for specific coffee shops
+
+* Trustpilot Categories API for all coffee shops
+* Trustpilot Business Unit company logo for specific coffee shops
 
 ### Deployment
 
 Front-end: Netlify
+
 Back-end: Render
+
 Database: Mongo Atlas
