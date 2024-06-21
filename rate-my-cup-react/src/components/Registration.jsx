@@ -72,13 +72,9 @@ const Registration = () => {
         </form>
         }
       {successfulRegistration === "successful" &&
-        <div className="text-success">
-            Registration Successful!
-        </div>
-      }
+        <div className="text-success">Registration Successful!</div>}
       {successfulRegistration === "unsuccessful" && 
-          <div className="text-danger">Ensure inputted details are valid before registering</div>
-      }
+        <div className="text-danger">Ensure inputted details are valid before registering</div>}
       </div>
     </div>
   )
