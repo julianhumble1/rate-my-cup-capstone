@@ -1,6 +1,10 @@
 #registration-box {
     margin: auto;
-    background-color: green;
+    background-color: #DDD1C7;
     max-width: 1000px;
     margin-top: 100px;
+}
+
+#register-button {
+    background-color: #8DB580;
 }
