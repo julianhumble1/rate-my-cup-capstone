@@ -1,12 +1,12 @@
 .background-image {
-    background: url("coffee-background.jpg");
+    background: url("wood-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    opacity: 0.25;
     /* Adjust as needed */
     position: fixed;
+    opacity: 0.5;
     top: 0;
     left: 0;
     width: 100%;
