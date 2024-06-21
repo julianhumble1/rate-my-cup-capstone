@@ -53,4 +53,28 @@ describe("Registration Tests", () => {
             expect(screen.queryByText("Password must contain a special character, number and be at least 8 characters long")).not.toBeInTheDocument();
         })
     })
+
+    describe("Registration button effect tests", () => {
+        it("should render failed registration message if email is invalid", async () => {
+            // Arrange
+            await userEvent.type(emailInput, "badEmail")
+            await userEvent.type(passwordInput, "password1!")
+            // Act
+            const registerButton = screen.getByRole('button', { name: 'Sign Up' });
+            await userEvent.click(registerButton);
+            // Assert
+            expect(screen.getByText("Ensure inputted details are valid before registering")).toBeInTheDocument()
+        })
+
+        it("should render failed registration message if password is invalid", async () => {
+            // Arrange
+            await userEvent.type(emailInput, "email@email.com")
+            await userEvent.type(passwordInput, "badpassword")
+            // Act
+            const registerButton = screen.getByRole('button', { name: 'Sign Up' });
+            await userEvent.click(registerButton);
+            // Assert
+            expect(screen.getByText("Ensure inputted details are valid before registering")).toBeInTheDocument()
+        })
+    })
 })
