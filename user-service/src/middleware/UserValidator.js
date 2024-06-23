@@ -4,7 +4,6 @@ export default class UserValidator {
 
     static validateEmail = () => {
         try {
-            console.log("reached email")
             return [
                 expressValidator.body("email")
                     .isEmail().withMessage("Invalid email format")
@@ -18,7 +17,6 @@ export default class UserValidator {
 
     static validatePassword = () => {
         try {
-            console.log("reached password")
             return [
                 expressValidator.body("password")
                     .isLength({ min: 8 }).withMessage("Password must be at least 8 characters")
