@@ -1,13 +1,15 @@
 import { Router } from "express"
-
+import UserController from "../controllers/User.controller.js";
 export default class UserRoutes {
 
     #router;
     #routeStartPoint;
+    #controller
 
-    constructor(routeStartPoint = "/") {
+    constructor(controller = new UserController(), routeStartPoint = "/") {
         this.#routeStartPoint = routeStartPoint;
         this.#router = new Router();
+        this.#controller = controller;
         this.#initialiseRoutes();
     }
 
@@ -20,7 +22,7 @@ export default class UserRoutes {
         
         this.#router.post(
             "/",
-            (req, res) => {res.status(200).json("success")}
+            this.#controller.addNewUser
         )
     }
 
