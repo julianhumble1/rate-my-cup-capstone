@@ -21,7 +21,7 @@ describe("User service tests", () => {
         let newUser;
 
         beforeEach(() => {
-            userStub = sinon.stub(User.prototype, "constructor").callsFake((newUser) => { { } })
+            userStub = sinon.stub(User.prototype, "constructor")
             saveStub = sinon.stub(User.prototype, "save");
             bcryptStub = sinon.stub(bcrypt, "hashSync").returns("encryptedPassword")
             existingUserStub = sinon.stub(User, "findOne");
@@ -40,7 +40,7 @@ describe("User service tests", () => {
                 "email": "user@example.com",
                 "password": "encryptedPassword",
             }
-
+            userStub.returns(newUserDoc)
             saveStub.returns(newUserDoc)
             // Act
             const result = await userService.addNewUser(newUser)
@@ -51,16 +51,30 @@ describe("User service tests", () => {
         it("should throw an error when save fails", async () => {
             // Arrange
             const invalidUser = { email: "" };
-            const error = new Error("Invalid user")
-            saveStub.throws(error);
+            const error = new Error("Invalid new user")
+            saveStub.throws(error)
 
             // Act // Assert
             try {
                 await userService.addNewUser(invalidUser);
                 expect.fail("Expected error was not thrown")
             } catch (e) {
-                expect(e).to.equal(error);
+                expect(e.message).to.equal(error.message);
             } 
+        })
+
+        it("should throw an error when the user's email is already in the database", async () => {
+            // Arrange
+            const error = new Error("User with this email already exists")
+            existingUserStub.throws(error)
+            // Act // Assert
+            try {
+                await userService.addNewUser(newUser);
+                expect.fail("Expected error was not thrown")
+            } catch (e) {
+                expect(e.message).to.equal(error.message);
+            } 
+            
         })
 
     })
