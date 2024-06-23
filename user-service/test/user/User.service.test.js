@@ -74,7 +74,6 @@ describe("User service tests", () => {
             } catch (e) {
                 expect(e.message).to.equal(error.message);
             } 
-            
         })
 
     })
