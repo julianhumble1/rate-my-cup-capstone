@@ -51,7 +51,7 @@ const Registration = () => {
       <div className="container text-center rounded-5" id="registration-box">
         <h2>Registration</h2>
       {(successfulRegistration !== "successful") &&
-        <form noValidate className="container p-3" onSubmit={handleRegistration}>
+        <form noValidate className="container p-3" onSubmit={handleRegistration} data-testid = "registration-form">
           <div className="row justify-content-center">
             <div className="col-10 col-md-8">
               <input className="form-control" type="email" placeholder="email@email.com" value={email} onChange={(e) => setEmail(e.target.value)}  onBlur={(e) => handleEmailChange(e.target.value)}/>

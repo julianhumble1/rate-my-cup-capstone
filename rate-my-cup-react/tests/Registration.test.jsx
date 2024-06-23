@@ -54,7 +54,7 @@ describe("Registration Tests", () => {
         })
     })
 
-    describe("Registration button effect tests", () => {
+    describe("Registration button render effect tests", () => {
         it("should render failed registration message if email is invalid", async () => {
             // Arrange
             await userEvent.type(emailInput, "badEmail")
@@ -75,6 +75,39 @@ describe("Registration Tests", () => {
             await userEvent.click(registerButton);
             // Assert
             expect(screen.getByText("Ensure inputted details are valid before registering")).toBeInTheDocument()
+        })
+
+        it("should render successful register message after pressing register with valid details", async () => {
+            // Arrange
+            await userEvent.type(emailInput, "email@email.com")
+            await userEvent.type(passwordInput, "password1!")
+            // Act
+            const registerButton = screen.getByRole('button', { name: 'Sign Up' });
+            await userEvent.click(registerButton);
+            // Assert
+            expect(screen.getByText("Registration Successful!")).toBeInTheDocument();
+        })
+
+        it("should no longer render form after successful registration", async () => {
+            // Arrange
+            await userEvent.type(emailInput, "email@email.com")
+            await userEvent.type(passwordInput, "password1!")
+            // Act
+            const registerButton = screen.getByRole('button', { name: 'Sign Up' });
+            await userEvent.click(registerButton);
+            // Assert
+            expect(screen.queryByTestId("registration-form")).not.toBeInTheDocument();
+        })
+
+        it("should still render form after unsuccessful registration", async () => {
+            // Arrange
+            await userEvent.type(emailInput, "bademail")
+            await userEvent.type(passwordInput, "badpassword")
+            // Act
+            const registerButton = screen.getByRole('button', { name: 'Sign Up' });
+            await userEvent.click(registerButton);
+            // Assert
+            expect(screen.queryByTestId("registration-form")).toBeInTheDocument();
         })
     })
 })

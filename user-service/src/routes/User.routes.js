@@ -1,5 +1,6 @@
 import { Router } from "express"
 import UserController from "../controllers/User.controller.js";
+import UserValidator from "../middleware/UserValidator.js";
 export default class UserRoutes {
 
     #router;
@@ -22,6 +23,7 @@ export default class UserRoutes {
         
         this.#router.post(
             "/",
+            [...UserValidator.validateEmail(), ...UserValidator.validatePassword()],
             this.#controller.addNewUser
         )
     }
