@@ -7,7 +7,7 @@ export default class UserRoutes {
     #routeStartPoint;
     #controller
 
-    constructor(controller = new UserController(), routeStartPoint = "/") {
+    constructor(controller = new UserController(), routeStartPoint = "/user") {
         this.#routeStartPoint = routeStartPoint;
         this.#router = new Router();
         this.#controller = controller;
@@ -22,7 +22,7 @@ export default class UserRoutes {
        }); 
         
         this.#router.post(
-            "/",
+            "/register",
             [...UserValidator.validateEmail(), ...UserValidator.validatePassword()],
             this.#controller.addNewUser
         )

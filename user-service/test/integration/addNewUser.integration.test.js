@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import sinon from "sinon"
 import supertest from "supertest"
 
 import Config from "../../src/config/Config.js"
@@ -57,11 +56,11 @@ describe("addNewUser integration tests", () => {
         }
     })
 
-    describe("POST requests to '/' on userRoutes", () => {
+    describe("POST requests to '/register' on userRoutes", () => {
         it("should response with a 201 status code if successful", async () => {
             // Arrange
             // Act
-            const response = await request.post("/").send(newUser);
+            const response = await request.post("/user/register").send(newUser);
             // Assert
             expect(response.status).to.equal(201);
         })
@@ -69,7 +68,7 @@ describe("addNewUser integration tests", () => {
         it("should respond with the created user if successful", async () => {
             // Arrange
             // Act
-            const response = await request.post("/").send(newUser);
+            const response = await request.post("/user/register").send(newUser);
             // Assert
             expect(response.body.email).to.equal(newUser.email);
         })
@@ -78,7 +77,7 @@ describe("addNewUser integration tests", () => {
             // Arrange
             const invalidUser = {...newUser, email: "user1@example.com"}
             // Act
-            const response = await request.post("/").send(invalidUser);
+            const response = await request.post("/user/register").send(invalidUser);
             // Assert
             expect(response.status).to.equal(400)
         })
@@ -87,7 +86,7 @@ describe("addNewUser integration tests", () => {
             // Arrange
             const invalidUser = { ...newUser, email: "email" }
             // Act
-            const response = await request.post("/").send(invalidUser);
+            const response = await request.post("/user/register").send(invalidUser);
             // Assert
             expect(response.status).to.equal(400);
         })
@@ -97,7 +96,7 @@ describe("addNewUser integration tests", () => {
             const invalidUser = { ...newUser }
             delete invalidUser.email;
             // Act
-            const response = await request.post("/").send(invalidUser);
+            const response = await request.post("/user/register").send(invalidUser);
             // Assert
             expect(response.status).to.equal(400);
         })
@@ -106,7 +105,7 @@ describe("addNewUser integration tests", () => {
             // Arrange
             const invalidUser = { ...newUser, password: "password" }
             // Act
-            const response = await request.post("/").send(invalidUser);
+            const response = await request.post("/user/register").send(invalidUser);
             // Assert
             expect(response.status).to.equal(400);
         })
@@ -116,7 +115,7 @@ describe("addNewUser integration tests", () => {
             const invalidUser = { ...newUser }
             delete invalidUser.password;
             // Act
-            const response = await request.post("/").send(invalidUser);
+            const response = await request.post("/user/register").send(invalidUser);
             // Assert
             expect(response.status).to.equal(400);
         })
