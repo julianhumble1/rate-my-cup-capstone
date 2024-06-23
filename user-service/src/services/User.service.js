@@ -15,7 +15,7 @@ export default class UserService {
             if (e.message === "User with this email already exists") {
                 throw new Error(e.message)
             } else {
-                throw new Error("Invalid new user");
+                throw new Error("Internal system error");
             }
         }
         return await user.save();

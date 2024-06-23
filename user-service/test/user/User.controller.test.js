@@ -73,13 +73,22 @@ describe("User Controller tests", () => {
             expect(res.status.calledWith(201)).to.be.true;
         })
 
-        it("should respond with 500 code if addNewUser service throws error", async () => {
+        it("should respond with 500 code if addNewUser service throws internal system error", async () => {
             // Arrange
-            userServices.addNewUser.rejects(new Error("service error"))
+            userServices.addNewUser.rejects(new Error("Internal system error"))
             // Act
             await userController.addNewUser(req, res)
             // Assert
             expect(res.status.calledWith(500)).to.be.true;
+        })
+
+        it("should respond with 400 code if addNewUser service throws email already in database error", async () => {
+            // Arrange
+            userServices.addNewUser.rejects(new Error("User with this email already exists"))
+            // Act
+            await userController.addNewUser(req, res)
+            // Assert
+            expect(res.status.calledWith(400)).to.be.true;
         })
     })
 })

@@ -74,14 +74,13 @@ describe("addNewUser integration tests", () => {
             expect(response.body.email).to.equal(newUser.email);
         })
 
-        it("should respond with a 500 status code if there is an error in the service", async () => {
+        it("should respond with a 400 status code if email is already in database", async () => {
             // Arrange
-            const serviceStub = sinon.stub(userService, "addNewUser")
-            serviceStub.throws(new Error("test error")); 
+            const invalidUser = {...newUser, email: "user1@example.com"}
             // Act
-            const response = await request.post("/").send(newUser);
+            const response = await request.post("/").send(invalidUser);
             // Assert
-            expect(response.status).to.equal(500);
+            expect(response.status).to.equal(400)
         })
     })
 })

@@ -16,7 +16,11 @@ export default class UserController {
             const newUser = await this.#service.addNewUser(req.body)
             return res.status(201).json(newUser)
         } catch (error) {
-            return res.status(500).json(error.message)
+            if (error.message === "Internal system error") {
+                return res.status(500).json(error.message)
+            } else if (error.message === "User with this email already exists") {
+                return res.status(400).json(error.message)
+            }
         }
     }
 
