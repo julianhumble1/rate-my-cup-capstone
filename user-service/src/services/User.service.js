@@ -12,7 +12,11 @@ export default class UserService {
                 password: bcrypt.hashSync(newUser.password, 8)
             })
         } catch (e) {
-            throw new Error(e.message);
+            if (e.message === "User with this email already exists") {
+                throw new Error(e.message)
+            } else {
+                throw new Error("Internal system error");
+            }
         }
         return await user.save();
     }
@@ -23,5 +27,4 @@ export default class UserService {
             throw new Error("User with this email already exists")
         }
     }
-
 }
