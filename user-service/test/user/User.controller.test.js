@@ -72,5 +72,14 @@ describe("User Controller tests", () => {
             // Assert
             expect(res.status.calledWith(201)).to.be.true;
         })
+
+        it("should respond with 500 code if addNewUser service throws error", async () => {
+            // Arrange
+            userServices.addNewUser.rejects(new Error("service error"))
+            // Act
+            await userController.addNewUser(req, res)
+            // Assert
+            expect(res.status.calledWith(500)).to.be.true;
+        })
     })
 })
