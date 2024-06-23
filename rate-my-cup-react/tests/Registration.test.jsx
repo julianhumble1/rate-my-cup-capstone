@@ -2,17 +2,28 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 
 import Registration from "../src/components/Registration.jsx"
+import UserService from "../src/services/UserService.js";
 
 describe("Registration Tests", () => {
     let emailInput;
     let passwordInput;
 
+    
     beforeEach(async () => {
         render(
             <Registration />
         )
         emailInput = await screen.findByPlaceholderText("email@email.com")
         passwordInput = await screen.findByPlaceholderText("Password")
+        
+        vi.mock("../src/services/UserService.js", () => ({
+            default: class {
+                static register = vi.fn();
+            }
+        }))
+    })
+    
+    afterEach(() => {
         vi.clearAllMocks();
     })
 
@@ -77,7 +88,7 @@ describe("Registration Tests", () => {
             expect(screen.getByText("Ensure inputted details are valid before registering")).toBeInTheDocument()
         })
 
-        it("should render successful register message after pressing register with valid details", async () => {
+        it("should render successful register message after  successful registration", async () => {
             // Arrange
             await userEvent.type(emailInput, "email@email.com")
             await userEvent.type(passwordInput, "password1!")
@@ -99,10 +110,22 @@ describe("Registration Tests", () => {
             expect(screen.queryByTestId("registration-form")).not.toBeInTheDocument();
         })
 
-        it("should still render form after unsuccessful registration", async () => {
+        it("should still render form after invalid registration", async () => {
             // Arrange
             await userEvent.type(emailInput, "bademail")
             await userEvent.type(passwordInput, "badpassword")
+            // Act
+            const registerButton = screen.getByRole('button', { name: 'Sign Up' });
+            await userEvent.click(registerButton);
+            // Assert
+            expect(screen.queryByTestId("registration-form")).toBeInTheDocument();
+        })
+
+        it("should still render form after failed registration", async () => {
+            // Arrange
+            await userEvent.type(emailInput, "email@email.com")
+            await userEvent.type(passwordInput, "password1!")
+            UserService.register.mockRejectedValue(new Error("Failed registration"))
             // Act
             const registerButton = screen.getByRole('button', { name: 'Sign Up' });
             await userEvent.click(registerButton);

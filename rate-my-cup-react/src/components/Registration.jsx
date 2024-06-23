@@ -2,6 +2,7 @@ import "../css/Registration.css"
 
 import { useState } from "react"
 import InputValidator from "../utils/InputValidator.js";
+import UserService from "../services/UserService.js";
 
 const Registration = () => {
 
@@ -10,6 +11,7 @@ const Registration = () => {
   const [password, setPassword] = useState("")
   const [passwordError, setPasswordError] = useState("")
   const [successfulRegistration, setSuccessfulRegistration] = useState("")
+  const [registrationError, setRegistrationError] = useState("")
 
   const handleEmailChange = (newEmail) => {
     setEmail(newEmail)
@@ -31,7 +33,7 @@ const Registration = () => {
     }
   }
 
-  const handleRegistration = (event) => {
+  const handleRegistration = async (event) => {
     event.preventDefault();
     const validEmail = InputValidator.validateEmail(email)
     const validPassword = InputValidator.validatePassword(password)
@@ -40,9 +42,19 @@ const Registration = () => {
         handlePasswordChange(password)
         setEmail("")
         setPassword("")
-        setSuccessfulRegistration("unsuccessful")
+        setSuccessfulRegistration("invalid")
     } else {
+      await sendRegistrationRequest(email, password)
+    }
+  }
+
+  const sendRegistrationRequest = async (email, password) => {
+    try {
+      await UserService.register(email, password)
       setSuccessfulRegistration("successful")
+    } catch (error) {
+      setSuccessfulRegistration("failed")
+      setRegistrationError(error.message)
     }
   }
 
@@ -72,8 +84,11 @@ const Registration = () => {
         </form>
         }
       {successfulRegistration === "successful" &&
-        <div className="text-success">Registration Successful!</div>}
-      {successfulRegistration === "unsuccessful" && 
+          <div className="text-success">Registration Successful!</div>}
+      {successfulRegistration === "failed" &&
+          <div className="text-danger">{registrationError}</div>
+      }
+      {successfulRegistration === "invalid" && 
         <div className="text-danger">Ensure inputted details are valid before registering</div>}
       </div>
     </div>
