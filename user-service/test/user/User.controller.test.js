@@ -63,5 +63,14 @@ describe("User Controller tests", () => {
             // Assert
             expect(res.json.calledWith(newUser)).to.be.true;
         })
+
+        it("should respond with status code 201 if request is successful", async () => {
+            // Arrange
+            userServices.addNewUser.resolves(newUser);
+            // Act
+            await userController.addNewUser(req, res);
+            // Assert
+            expect(res.status.calledWith(201)).to.be.true;
+        })
     })
 })
