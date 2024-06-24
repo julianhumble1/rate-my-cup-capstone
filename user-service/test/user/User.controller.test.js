@@ -160,5 +160,14 @@ describe("User Controller tests", () => {
             // Assert
             expect(res.status.calledWith(404)).to.be.true;
         })
+
+        it("should respond with response code 500 if it fails to make query to database", async () => {
+            // Arrange
+            userServices.loginUser.rejects(new Error("Internal system error"))
+            // Act
+            await userController.loginUser(req, res);
+            // Assert
+            expect(res.status.calledWith(500)).to.be.true;
+        })
     })
 })
