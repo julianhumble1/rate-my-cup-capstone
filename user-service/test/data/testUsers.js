@@ -11,6 +11,7 @@ const generateTestData = async () => {
                 "_id": "666ebf51cdf1cff8e67b6fc4",
                 "email": "user1@example.com",
                 "password": await hashPassword("password1!"),
+                "role": "user",
                 "__v": 0
             },
 
@@ -18,6 +19,7 @@ const generateTestData = async () => {
                 "_id": "666ec0cbcdf1cff8e67b6fc8",
                 "email": "user2@example.com",
                 "password": await hashPassword("password2!"),
+                "role":"user",
                 "__v": 0
             }
         ],

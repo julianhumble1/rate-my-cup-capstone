@@ -70,9 +70,17 @@ describe("loginUser integration tests", () => {
         it("should respond with accessToken if successful", async () => {
             // Arrange
             // Act
-            const response = await request.post("/login").send(loginUser)
+            const response = await request.post("/user/login").send(loginUser)
             // Assert
             expect(response.body.accessToken).not.to.equal(null)
+        })
+
+        it("should respond with user role if successful login to user", async () => {
+            // Arrange
+            // Act
+            const response = await request.post("/user/login").send(loginUser)
+            // Assert
+            expect(response.body.role).to.equal("user")
         })
     })
 
