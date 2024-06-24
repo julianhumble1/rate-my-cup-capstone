@@ -142,6 +142,16 @@ describe("loginUser integration tests", () => {
             // Assert
             expect(response.status).to.equal(400)
         })
+
+        it("should respond with 400 if bad request - no email", async () => {
+            // Arrange
+            const invalidUser = { ...loginUser }
+            delete invalidUser.email;
+            // Act
+            const response = await request.post("/user/login").send(invalidUser)
+            // Assert
+            expect(response.status).to.equal(400)
+        })
     })
 
 })
