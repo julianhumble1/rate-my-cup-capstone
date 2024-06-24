@@ -143,5 +143,14 @@ describe("User Controller tests", () => {
             expect(res.status.calledWith(201)).to.be.true;
         }) 
 
+        it("should respond with with response code 401 if password does not match email", async () => {
+            // Arrange
+            userServices.loginUser.resolves(invalidServiceResponse)
+            // Act
+            await userController.loginUser(req, res);
+            // Assert
+            expect(res.status.calledWith(401)).to.be.true;
+        })
+        
     })
 })
