@@ -66,6 +66,14 @@ describe("loginUser integration tests", () => {
             // Assert
             expect(response.status).to.equal(201);
         })
+
+        it("should respond with accessToken if successful", async () => {
+            // Arrange
+            // Act
+            const response = await request.post("/login").send(loginUser)
+            // Assert
+            expect(response.body.accessToken).not.to.equal(null)
+        })
     })
 
 })
