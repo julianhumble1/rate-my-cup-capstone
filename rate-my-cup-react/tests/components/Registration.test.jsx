@@ -9,7 +9,6 @@ describe("Registration Tests", () => {
     let emailInput;
     let passwordInput;
 
-    
     beforeEach(async () => {
         render(
             <MemoryRouter>
@@ -91,7 +90,7 @@ describe("Registration Tests", () => {
             expect(screen.getByText("Ensure inputted details are valid before registering")).toBeInTheDocument()
         })
 
-        it("should render successful register message after  successful registration", async () => {
+        it("should render successful register message after successful registration", async () => {
             // Arrange
             await userEvent.type(emailInput, "email@email.com")
             await userEvent.type(passwordInput, "password1!")
