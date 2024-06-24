@@ -133,6 +133,15 @@ describe("loginUser integration tests", () => {
             // Assert
             expect(response.status).to.equal(400)
         })
+
+        it("should respond with 400 if bad request - invalid password", async () => {
+            // Arrange
+            const invalidUser = { ...loginUser, password: "password" }
+            // Act
+            const response = await request.post("/user/login").send(invalidUser)
+            // Assert
+            expect(response.status).to.equal(400)
+        })
     })
 
 })
