@@ -11,7 +11,7 @@ import UserRoutes from "../../src/routes/User.routes.js"
 import UserService from "../../src/services/User.service.js"
 
 import generateTestData from "../data/testUsers.js"
-const { testUsers, loginUser } = await generateTestData();
+const { testUsers, loginUser, loginAdmin } = await generateTestData();
 
 describe("loginUser integration tests", () => {
 
@@ -81,6 +81,14 @@ describe("loginUser integration tests", () => {
             const response = await request.post("/user/login").send(loginUser)
             // Assert
             expect(response.body.role).to.equal("user")
+        })
+
+        it("should respond with admin role if successful login to admin", async () => {
+            // Arrange
+            // Act
+            const response = await request.post("/user/login").send(loginAdmin)
+            // Assert
+            expect(response.body.role).to.equal("admin")
         })
     })
 

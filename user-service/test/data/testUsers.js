@@ -21,16 +21,29 @@ const generateTestData = async () => {
                 "password": await hashPassword("password2!"),
                 "role":"user",
                 "__v": 0
+            },
+
+            {
+                "_id": "666ec0cbcdf1cff8e67b6fc7",
+                "email": "user3@example.com",
+                "password": await hashPassword("password3!"),
+                "role":"admin",
+                "__v": 0
             }
         ],
         newUser: {
-            "email": "user3@example.com",
+            "email": "user4@example.com",
             "password": await hashPassword("password3!")
         },
 
         loginUser: {
             "email": "user1@example.com",
             "password": "password1!"
+        },
+
+        loginAdmin: {
+            "email": "user3@example.com",
+            "password": "password3!"
         }
     }
 }
