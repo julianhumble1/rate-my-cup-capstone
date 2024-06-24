@@ -90,6 +90,14 @@ describe("loginUser integration tests", () => {
             // Assert
             expect(response.body.role).to.equal("admin")
         })
+
+        it("should respond with user id if successful", async () => {
+            // Arrange
+            // Act
+            const response = await request.post("/user/login").send(loginUser)
+            // Assert
+            expect(response.body.id).to.equal("666ebf51cdf1cff8e67b6fc4")
+        })
     })
 
 })
