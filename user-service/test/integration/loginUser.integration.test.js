@@ -106,6 +106,33 @@ describe("loginUser integration tests", () => {
             // Assert
             expect(response.body.email).to.equal("user1@example.com")
         })
+
+        it("should respond with 401 if password doesn't match email", async () => {
+            // Arrange
+            const invalidUser = { ...loginUser, password: "wrongPassword1!" }
+            // Act
+            const response = await request.post("/user/login").send(invalidUser)
+            // Assert
+            expect(response.status).to.equal(401)
+        })
+
+        it("should respond with 404 if email is not in database", async () => {
+            // Arrange
+            const invalidUser = { ...loginUser, email: "no@email.com" }
+            // Act
+            const response = await request.post("/user/login").send(invalidUser)
+            // Assert
+            expect(response.status).to.equal(404)
+        })
+
+        it("should respond with 400 if bad request - invalid email", async () => {
+            // Arrange
+            const invalidUser = { ...loginUser, email: "email" }
+            // Act
+            const response = await request.post("/user/login").send(invalidUser)
+            // Assert
+            expect(response.status).to.equal(400)
+        })
     })
 
 })
