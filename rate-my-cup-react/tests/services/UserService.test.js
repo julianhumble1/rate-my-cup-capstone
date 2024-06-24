@@ -58,5 +58,18 @@ describe("User Service tests", () => {
                 expect(error.message).toBe("failed to add");
             }
         })
+
+        it("should return the expected data when axios request is successful", async () => {
+            // Arrange
+            axios.post.mockResolvedValue({
+                data: {
+                    message: "Successful"
+                }
+            })
+            // Act
+            const responseData = await UserService.login("email@email.com", "password1!") 
+            // Assert
+            expect(responseData).to.deep.equal({message: "Successful"})
+        })
     })
 })
