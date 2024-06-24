@@ -24,6 +24,11 @@ const generateTestData = async () => {
         newUser: {
             "email": "user3@example.com",
             "password": await hashPassword("password3!")
+        },
+
+        loginUser: {
+            "email": "user1@example.com",
+            "password": "password1!"
         }
     }
 }

@@ -56,7 +56,7 @@ describe("addNewUser integration tests", () => {
         }
     })
 
-    describe("POST requests to '/register' on userRoutes", () => {
+    describe("POST requests to '/user/register' on userRoutes", () => {
         it("should response with a 201 status code if successful", async () => {
             // Arrange
             // Act
