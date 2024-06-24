@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { MemoryRouter } from "react-router-dom";
 
 import Registration from "../src/components/Registration.jsx"
 import UserService from "../src/services/UserService.js";
@@ -11,7 +12,9 @@ describe("Registration Tests", () => {
     
     beforeEach(async () => {
         render(
-            <Registration />
+            <MemoryRouter>
+                <Registration />
+            </MemoryRouter>
         )
         emailInput = await screen.findByPlaceholderText("email@email.com")
         passwordInput = await screen.findByPlaceholderText("Password")

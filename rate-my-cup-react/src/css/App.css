@@ -1,10 +1,8 @@
 .background-image {
     background: #FEFAE0;
-    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    /* Adjust as needed */
     position: fixed;
     top: 0;
     left: 0;

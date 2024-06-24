@@ -1,0 +1,12 @@
+#login-box {
+    margin: auto;
+    color: white;
+    background-color: #DDA15E;
+    max-width: 1000px;
+    margin-top: 200px;
+}
+
+#login-button {
+    background-color: #606C38;
+    color: white;
+}

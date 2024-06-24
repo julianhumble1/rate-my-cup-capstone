@@ -4,6 +4,8 @@ import { useState } from "react"
 import InputValidator from "../utils/InputValidator.js";
 import UserService from "../services/UserService.js";
 
+import {Link} from "react-router-dom"
+
 const Registration = () => {
 
   const [email, setEmail] = useState("");
@@ -83,8 +85,16 @@ const Registration = () => {
           </div>
         </form>
         }
-      {successfulRegistration === "successful" &&
-          <div className="text-success">Registration Successful!</div>}
+        {successfulRegistration === "successful" &&
+          <>
+          <div className="text-success">
+            Registration Successful!
+          </div>
+          <Link to="/login-screen">
+            Click here to login
+          </Link>
+          </>
+        }
       {successfulRegistration === "failed" &&
           <div className="text-danger">{registrationError}</div>
       }
