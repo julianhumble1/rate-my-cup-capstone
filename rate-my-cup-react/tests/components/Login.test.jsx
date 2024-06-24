@@ -61,7 +61,18 @@ describe("Login Screen tests", () => {
         await userEvent.click(loginButton);
         // Assert
         expect(global.localStorage.setItem).toHaveBeenCalledWith("accessToken", "123")
+    })
 
+    it("should save the role to local storage is login is successful", async () => {
+        // Arrange
+        await userEvent.type(emailInput, "email@email.com")
+        await userEvent.type(passwordInput, "password1!")
+        UserService.login.mockResolvedValue(successfulResponse)
+        // Act
+        const loginButton = screen.getByRole('button', { name: 'Login' });
+        await userEvent.click(loginButton);
+        // Assert
+        expect(global.localStorage.setItem).toHaveBeenCalledWith("role", "user")
     })
 
 })
