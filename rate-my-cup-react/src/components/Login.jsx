@@ -1,17 +1,29 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 import "../css/Login.css"
+import UserService from "../services/UserService.js";
 
 const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [loginAttemptStatus, setLoginAttemptStatus] = useState("")
+  const [failedLoginAttempt, setFailedLoginAttempt] = useState(false)
 
-  const handleLogin = (event) => {
+  const navigate = useNavigate();
+
+  const handleLogin = async (event) => {
     event.preventDefault();
-    setLoginAttemptStatus("failed")
+    try {
+      const responseData = await UserService.login(email, password)
+      localStorage.setItem("accessToken", responseData.accessToken)
+      localStorage.setItem("role", responseData.role)
+      localStorage.setItem("id", responseData.id)
+      navigate("/home")
+    } catch (error) {
+      setFailedLoginAttempt(true)
+    }
   }
 
   return (
@@ -36,7 +48,7 @@ const Login = () => {
                 <button className="col-md-2 col-6 mx-auto mx-md-0 btn my-2 my-md-0 overflow-hidden " type="submit" id="login-button">Login</button>
               </div>
           </form>
-          {loginAttemptStatus === "failed" &&
+          {failedLoginAttempt &&
             <div className="text-danger">
               Username or password incorrect. Please try again.
             </div>
