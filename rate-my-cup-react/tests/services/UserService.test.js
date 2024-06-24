@@ -41,4 +41,22 @@ describe("User Service tests", () => {
             expect(responseData).to.deep.equal({message: "Successful"})
         })
     })
+
+    describe("login tests", () => {
+        it("should throw an error with correct message if axios request throws error", async () => {
+            // Arrange
+            axios.post.mockRejectedValue({
+                response: {
+                    data: "failed to add"
+                }
+            })
+            // Act // Assert
+            try {
+                await UserService.login("test@example.com", "password1!");
+                throw new Error("Expected register to throw an error, but it did not");
+            } catch (error) {
+                expect(error.message).toBe("failed to add");
+            }
+        })
+    })
 })
