@@ -8,10 +8,18 @@ export default class UserService {
         let user;
         try {
             await this.#checkEmailTaken(newUser.email)
-            user = new User({
-                email: newUser.email,
-                password: bcrypt.hashSync(newUser.password, 8)
-            })
+            if (!newUser.role) {
+                user = new User({
+                    email: newUser.email,
+                    password: bcrypt.hashSync(newUser.password, 8)
+                })  
+            } else {
+                user = new User({
+                    email: newUser.email,
+                    password: bcrypt.hashSync(newUser.password, 8),
+                    role: newUser.role
+                }) 
+            }
         } catch (e) {
             if (e.message === "User with this email already exists") {
                 throw new Error(e.message)

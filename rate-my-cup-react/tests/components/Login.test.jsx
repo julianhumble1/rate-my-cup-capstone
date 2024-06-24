@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MemoryRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Login from "../../src/components/Login.jsx"
 import UserService from "../../src/services/UserService.js";
@@ -30,9 +31,11 @@ describe("Login Screen tests", () => {
             }
         }))
 
+
         global.localStorage = {
             setItem: vi.fn()
         }
+
     })
 
     afterEach(() => {
