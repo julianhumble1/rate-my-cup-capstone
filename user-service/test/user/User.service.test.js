@@ -126,6 +126,20 @@ describe("User service tests", () => {
                 expect(e.message).to.equal(error.message);
             }
         })
+
+        it("should return a null access token if username doesn't match email", async () => {
+            // Arrange
+            const invalidUser = {
+                email: "email3@email.com",
+                password: "password1!"
+            };
+            findUserStub.returns({})
+            bcryptStub.returns(false);
+            // Act
+            const response = await userService.loginUser(invalidUser)
+            // Assert
+            expect(response.accessToken).to.equal(null)
+        })
     })
 
 })
