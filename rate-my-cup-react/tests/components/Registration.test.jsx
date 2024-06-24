@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MemoryRouter } from "react-router-dom";
 
-import Registration from "../src/components/Registration.jsx"
-import UserService from "../src/services/UserService.js";
+import Registration from "../../src/components/Registration.jsx"
+import UserService from "../../src/services/UserService.js";
 
 describe("Registration Tests", () => {
     let emailInput;
@@ -19,7 +19,7 @@ describe("Registration Tests", () => {
         emailInput = await screen.findByPlaceholderText("email@email.com")
         passwordInput = await screen.findByPlaceholderText("Password")
         
-        vi.mock("../src/services/UserService.js", () => ({
+        vi.mock("../../src/services/UserService.js", () => ({
             default: class {
                 static register = vi.fn();
             }
