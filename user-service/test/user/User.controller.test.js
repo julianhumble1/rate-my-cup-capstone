@@ -91,4 +91,48 @@ describe("User Controller tests", () => {
             expect(res.status.calledWith(400)).to.be.true;
         })
     })
+
+    describe("loginUser requests tests", () => {
+
+        beforeEach(() => {
+            userServices = {
+                loginUser: sinon.stub()
+            }
+            userController = new UserController(userServices)
+
+            req = {
+                body:
+                    {"email": "user@example.com",
+                    "password": "password1!"}
+            }     
+            
+            next = sinon.spy();
+            userValidatorStub = sinon.stub(UserValidator, "handleValidationErrors").callsFake((req, res, next) => next)
+        })
+
+        const validServiceResponse = {
+            id: 123,
+            email: "email@email.com",
+            accessToken: "validToken",
+            role: 1
+        }
+        
+        const invalidServiceResponse = {
+            accessToken: null
+        }
+
+        afterEach(() => {
+            sinon.restore();
+        })
+
+        it("should respond with details and access token if request is successful", async () => {
+            // Arrange
+            userServices.loginUser.resolves(validServiceResponse)
+            // Act
+            await userController.loginUser(req, res);
+            // Assert
+            expect(res.json.calledWith(validServiceResponse)).to.be.true;
+        })
+
+    })
 })
