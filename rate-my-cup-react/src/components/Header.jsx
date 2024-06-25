@@ -26,7 +26,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarToggler">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
-                            <Link to="/home" className="nav-link" aria-current="page" href="#">Home</Link>
+                            <Link to="/home" className="nav-link" id = "home-link" aria-current="page" href="#">Home</Link>
                         </ul>
                         {loggedIn &&
                         <button type="button" className="btn" id ="logout" onClick={logout}>Logout</button>}

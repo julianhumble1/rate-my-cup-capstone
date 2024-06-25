@@ -11,12 +11,12 @@
     z-index: -1;
 }
 
-* {
-    font-family: contrail-one
-}
-
-.contrail-one-regular {
-    font-family: "Contrail One", sans-serif;
-    font-weight: 400;
+.nunito-sans-all {
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
     font-style: normal;
+    font-variation-settings:
+        "wdth" 100,
+        "YTLC" 500;
 }
