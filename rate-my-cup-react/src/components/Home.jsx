@@ -1,8 +1,9 @@
 import "../css/Home.css"
+import SearchResult from "./SearchResult.jsx"
 
 const Home = () => {
   return (
-    <div className = "container text-center bg-opacity-75 rounded padding-bottom" id="search-box">
+    <div className = "container text-center rounded-2 pb-3" id="search-box">
       <h1>Find your cup...</h1>
       <div className="row">
         <div className="d-none d-md-block col-md-2 ">
@@ -65,6 +66,14 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <SearchResult />
+      <SearchResult />
+      <SearchResult />  
+      <SearchResult />  
+      <SearchResult /> 
+      <SearchResult />  
+      <SearchResult />  
+      <SearchResult />  
     </div>
   )
 }
