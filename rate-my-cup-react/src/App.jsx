@@ -5,16 +5,16 @@ import Login from "./components/Login.jsx"
 import Home from "./components/Home.jsx"
 import { useEffect, useState } from "react"
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
 
 function App() {
 
-  const [loggedIn, setLoggedIn] = useState()
+  const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect(() => {
     const role = localStorage.getItem("role")
     if (role) {setLoggedIn(true)}
-  })
+  }, [])
 
   return (
     <Router>
@@ -24,6 +24,7 @@ function App() {
         setLoggedIn={setLoggedIn}
       />
       <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route
           path="/register"
           element = {<Registration/>}
