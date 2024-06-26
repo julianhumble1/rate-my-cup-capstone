@@ -41,7 +41,7 @@ describe("Coffee controller tests", () => {
 
             coffeeValidatorStub = sinon.stub(CoffeeValidator, "handleValidationErrors").callsFake((req, res, next) => next)
 
-            formatLocationListStub = sinon.stub(coffeeController.formatLocationList)
+            formatLocationListStub = sinon.stub(coffeeController, "formatLocationList")
 
         })
 
@@ -52,6 +52,16 @@ describe("Coffee controller tests", () => {
             await coffeeController.getCoffeeByLocation(req, res)
             // Assert
             expect(res.status.calledWith(503)).to.be.true
+        })
+
+        it("should send response code 201 if service call is successful", async () => {
+            // Arrange
+            coffeeService.getCoffeeByLocation.resolves({"success": "success"})
+            formatLocationListStub.returns({"test":"test"})
+            // Act
+            await coffeeController.getCoffeeByLocation(req, res)
+            // Assert
+            expect(res.status.calledWith(201)).to.be.true;
         })
 
     })
