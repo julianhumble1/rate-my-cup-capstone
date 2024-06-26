@@ -1,15 +1,18 @@
 import { Router } from "express";
 
 import CoffeeValidator from "../middleware/CoffeeValidator.js";
+import CoffeeController from "../controllers/Coffee.controller.js";
 
 export default class CoffeeRoutes {
 
     #router;
     #routeStartPoint;
+    #controller;
 
-    constructor(routeStartPoint = "/coffee") {
+    constructor(controller = new CoffeeController(), routeStartPoint = "/coffee") {
         this.#routeStartPoint = routeStartPoint;
         this.#router = new Router();
+        this.#controller = controller;
         this.#initialiseRoutes();
     }
 
@@ -22,7 +25,8 @@ export default class CoffeeRoutes {
         
         this.#router.get(
             "/location",
-            ...CoffeeValidator.validatePostcode(),
+            [...CoffeeValidator.validatePostcode()],
+            this.#controller.getCoffeeByLocation
         )
 
      }

@@ -1,0 +1,6 @@
+GET http://localhost:3002/coffee/location 
+Content-Type: application/json
+
+{
+    "postcode": "TW182DF"
+}
