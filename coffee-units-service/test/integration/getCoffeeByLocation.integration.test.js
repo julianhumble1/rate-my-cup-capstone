@@ -44,6 +44,18 @@ describe("getCoffeeByLocation integration tests", () => {
             // Assert
             expect(response.status).to.equal(201);
         })
+
+        it("should respond with 20 objects in response body", async () => {
+            // Arrange
+            const validPostcode = {
+                "postcode": "tw18 2df"
+            }
+            // Act
+            const response = await request.get("/coffee/location").send(validPostcode)
+            // Assert
+            console.log(response)
+            expect(response.body.length).to.equal(20);
+        })
     })
 
 
