@@ -73,7 +73,5 @@ describe("Coffee controller tests", () => {
             // Assert
             expect(res.json.calledWith({"test":"test"})).to.be.true;
         })
-
     })
-
 })
