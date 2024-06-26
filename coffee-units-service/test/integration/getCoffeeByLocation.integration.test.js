@@ -77,6 +77,17 @@ describe("getCoffeeByLocation integration tests", () => {
             // Assert
             expect(response.body[0].name).to.not.be.null;
         })
+
+         it("should respond with objects with address property if successful", async () => {
+            // Arrange
+            const validPostcode = {
+                "postcode": "tw18 2df"
+            }
+            // Act
+            const response = await request.get("/coffee/location").send(validPostcode)
+            // Assert
+            expect(response.body[0].address).to.not.be.null;
+        })
     })
 
 
