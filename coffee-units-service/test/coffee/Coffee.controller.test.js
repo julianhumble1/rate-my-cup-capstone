@@ -64,6 +64,16 @@ describe("Coffee controller tests", () => {
             expect(res.status.calledWith(201)).to.be.true;
         })
 
+        it("should send formatted location list if service call is successful", async () => {
+            // Arrange
+            coffeeService.getCoffeeByLocation.resolves({"success": "success"})
+            formatLocationListStub.returns({"test":"test"})
+            // Act
+            await coffeeController.getCoffeeByLocation(req, res)
+            // Assert
+            expect(res.json.calledWith({"test":"test"})).to.be.true;
+        })
+
     })
 
 })
