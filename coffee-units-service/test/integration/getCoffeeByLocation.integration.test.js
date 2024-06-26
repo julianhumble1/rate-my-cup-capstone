@@ -78,7 +78,7 @@ describe("getCoffeeByLocation integration tests", () => {
             expect(response.body[0].name).to.not.be.null;
         })
 
-         it("should respond with objects with address property if successful", async () => {
+        it("should respond with objects with address property if successful", async () => {
             // Arrange
             const validPostcode = {
                 "postcode": "tw18 2df"
@@ -87,6 +87,17 @@ describe("getCoffeeByLocation integration tests", () => {
             const response = await request.get("/coffee/location").send(validPostcode)
             // Assert
             expect(response.body[0].address).to.not.be.null;
+        })
+        
+        it("should respond with status code 400 if invalid postcode is sent", async () => {
+            // Arrange
+            const invalidPostcode = {
+                "postcode": "invalidPostcode"
+            }
+            // Act
+            const response = await request.get("/coffee/location").send(invalidPostcode)
+            // Assert
+            expect(response.status).to.equal(400);
         })
     })
 
