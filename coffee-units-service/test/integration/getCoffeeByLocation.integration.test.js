@@ -99,6 +99,17 @@ describe("getCoffeeByLocation integration tests", () => {
             // Assert
             expect(response.status).to.equal(400);
         })
+
+        it("should respond with status code 400 if no postcode is sent", async () => {
+            // Arrange
+            const noPostcode = {
+                "postcode": null
+            }
+            // Act
+            const response = await request.get("/coffee/location").send(noPostcode)
+            // Assert
+            expect(response.status).to.equal(400);
+        })
     })
 
 
