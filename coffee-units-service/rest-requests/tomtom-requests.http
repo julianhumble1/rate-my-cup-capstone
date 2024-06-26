@@ -1,0 +1,15 @@
+# 50 coffee shops and cafes near Staines by postcode
+
+https://api.tomtom.com/search/2/categorySearch/.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&geobias=point:51.43209650975175, -0.5030673590536578&limit=50&categorySet=9376002,9376006
+
+###
+
+# List of all categories
+
+https://api.tomtom.com/search/2/poiCategories.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&geobias=point:51.43209650975175
+
+###
+
+# Obtain longitude and latitude from postcode for Staines
+
+https://api.tomtom.com/maps/orbis/places/geocode/TW182df.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&apiVersion=1
