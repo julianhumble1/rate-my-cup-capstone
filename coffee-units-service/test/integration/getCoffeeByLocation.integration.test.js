@@ -45,7 +45,7 @@ describe("getCoffeeByLocation integration tests", () => {
             expect(response.status).to.equal(201);
         })
 
-        it("should respond with 20 objects in response body", async () => {
+        it("should respond with 20 objects in response body if successful", async () => {
             // Arrange
             const validPostcode = {
                 "postcode": "tw18 2df"
@@ -53,8 +53,18 @@ describe("getCoffeeByLocation integration tests", () => {
             // Act
             const response = await request.get("/coffee/location").send(validPostcode)
             // Assert
-            console.log(response)
             expect(response.body.length).to.equal(20);
+        })
+
+        it("should respond with objects with id property if successful", async () => {
+            // Arrange
+            const validPostcode = {
+                "postcode": "tw18 2df"
+            }
+            // Act
+            const response = await request.get("/coffee/location").send(validPostcode)
+            // Assert
+            expect(response.body[0].id).to.not.be.null;
         })
     })
 
