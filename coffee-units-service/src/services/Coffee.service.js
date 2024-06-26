@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default class CoffeeService {
 
-    #getCoordsFromPostcode = async (postcode) => {
+    getCoordsFromPostcode = async (postcode) => {
         let coords;
         try {
             const response = await axios.get(`https://api.tomtom.com/maps/orbis/places/geocode/${postcode}.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&apiVersion=1`)
@@ -15,7 +15,7 @@ export default class CoffeeService {
 
     getCoffeeByLocation = async (postcode) => {
         try {
-            const coords = await this.#getCoordsFromPostcode(postcode)
+            const coords = await this.getCoordsFromPostcode(postcode)
             const response = await axios.get(`https://api.tomtom.com/search/2/categorySearch/.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&geobias=point:${coords.lat},${coords.lon}&limit=20&categorySet=9376002,9376006`)
             const resultsList = response.data.results;
             return resultsList
