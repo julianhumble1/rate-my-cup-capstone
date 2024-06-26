@@ -2,6 +2,8 @@ import Config from "./config/config.js";
 import Database from "./db/Database.js";
 import Server from "./server/Server.js";
 
+import CoffeeRoutes from "./routes/Coffee.routes.js"
+
 Config.load()
 const { PORT, HOST, DB_URI } = process.env;
 

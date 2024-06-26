@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import CoffeeValidator from "../middleware/CoffeeValidator.js";
+
 export default class CoffeeRoutes {
 
     #router;
@@ -11,7 +13,19 @@ export default class CoffeeRoutes {
         this.#initialiseRoutes();
     }
 
-    #initialiseRoutes = () => { }
+    #initialiseRoutes = () => {
+        
+        this.#router.use((req, res, next) => {
+            res.header(`Access-Control-Allow-Headers`, `x-access-token, Origin, Content-Type, Accept`);
+            next();
+        }); 
+        
+        this.#router.get(
+            "/location",
+            ...CoffeeValidator.validatePostcode(),
+        )
+
+     }
 
     getRouter = () => {
         return this.#router
