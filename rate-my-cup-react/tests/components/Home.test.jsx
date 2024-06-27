@@ -49,6 +49,19 @@ describe("Home search page tests", () => {
             // Assert
             expect(screen.queryByText("Invalid postcode. Please ensure postcode is valid before trying again")).toBeInTheDocument();
         })
+
+        it("should render 30 search results if response is successful", async () => {
+            // Arrange
+            await userEvent.type(postcodeInput, "TW18 2DF")
+            CoffeeService.locationSearch.mockResolvedValue(successfulResponse)
+            // Act
+            const searchButton = screen.getByTestId("location-search-button")
+            await userEvent.click(searchButton)
+            // Assert
+            const searchResults = await screen.findAllByTestId("search-result")
+            expect(searchResults).toHaveLength(30)
+
+        })
     })
 
 })

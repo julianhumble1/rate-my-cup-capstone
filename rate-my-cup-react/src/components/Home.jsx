@@ -14,7 +14,6 @@ const Home = () => {
   const handleSearch = async () => {
     try {
       response = await CoffeeService.locationSearch(postcodeSearch)
-      console.log(response)
       setPostcodeError("")
       setLocationResults(response)
     } catch (e) {
