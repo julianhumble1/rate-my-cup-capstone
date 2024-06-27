@@ -25,5 +25,18 @@ describe("Coffee Service tests", () => {
             }
 
         })
+
+        it("should return the expected data when axios request is successful", async () => {
+            // Arrange
+            axios.get.mockResolvedValue({
+                data: {
+                    message: "Successful"
+                }
+            })
+            // Act
+            const responseData = await CoffeeService.locationSearch("TW18 2DF") 
+            // Assert
+            expect(responseData).to.deep.equal({message: "Successful"})
+        })
     })
 })
