@@ -23,7 +23,7 @@ export default class CoffeeRoutes {
         }); 
         
         this.#router.get(
-            "/location",
+            "/location?",
             [...CoffeeValidator.validatePostcode()],
             this.#controller.getCoffeeByLocation
         )

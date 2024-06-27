@@ -32,7 +32,7 @@ describe("Coffee controller tests", () => {
             coffeeController = new CoffeeController(coffeeService)
 
             req = {
-                body: {
+                query: {
                     "postcode" : "tw18 2df"
                 }
             }

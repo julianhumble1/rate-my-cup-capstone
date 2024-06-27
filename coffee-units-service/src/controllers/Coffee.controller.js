@@ -25,7 +25,7 @@ export default class CoffeeController {
         const sentResponse = CoffeeValidator.handleValidationErrors(req, res)
         if (sentResponse) return;
         try {
-            const locationList = await this.#service.getCoffeeByLocation(req.body.postcode)
+            const locationList = await this.#service.getCoffeeByLocation(req.query.postcode)
             const formattedLocationList = this.formatLocationList(locationList)
             return res.status(201).json(formattedLocationList)
         } catch (error) {

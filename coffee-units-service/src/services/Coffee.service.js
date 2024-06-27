@@ -16,7 +16,7 @@ export default class CoffeeService {
     getCoffeeByLocation = async (postcode) => {
         try {
             const coords = await this.getCoordsFromPostcode(postcode)
-            const response = await axios.get(`https://api.tomtom.com/search/2/categorySearch/.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&geobias=point:${coords.lat},${coords.lon}&limit=20&categorySet=9376002,9376006`)
+            const response = await axios.get(`https://api.tomtom.com/search/2/categorySearch/.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&geobias=point:${coords.lat},${coords.lon}&limit=30&categorySet=9376002,9376006`)
             const resultsList = response.data.results;
             return resultsList
         } catch (e) {
