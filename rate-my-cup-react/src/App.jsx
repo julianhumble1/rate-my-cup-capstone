@@ -24,7 +24,7 @@ function App() {
         setLoggedIn={setLoggedIn}
       />
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route
           path="/register"
           element = {<Registration/>}

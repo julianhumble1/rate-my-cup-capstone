@@ -6,7 +6,7 @@ export default class UserService {
 
     static register = async (email, password) => {
         try {
-            const response = await axios.post(`${API_URL}/register`, { email, password })
+            const response = await axios.post(`${API_URL}/register`, { "email": email, "password": password })
             return response.data;
         } catch (error) {
             throw new Error(error.response.data)

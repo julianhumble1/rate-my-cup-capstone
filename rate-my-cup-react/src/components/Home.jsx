@@ -1,26 +1,51 @@
 import "../css/Home.css"
+import CoffeeService from "../services/CoffeeService.js"
 import SearchResult from "./SearchResult.jsx"
+import { useState } from "react"
 
 const Home = () => {
+
+  let response;
+  const [locationResults, setLocationResults] = useState(null)
+
+  const [postcodeSearch, setPostcodeSearch] = useState("")
+  const [postcodeError, setPostcodeError] = useState("")
+
+  const handleSearch = async () => {
+    try {
+      response = await CoffeeService.locationSearch(postcodeSearch)
+      console.log(response)
+      setPostcodeError("")
+      setLocationResults(response)
+    } catch (e) {
+      if (e.message === "Request failed with status code 400") {
+        setPostcodeError("Invalid postcode. Please ensure postcode is valid before trying again")
+      }
+    }
+  }
+
   return (
     <div className = "container text-center rounded-2 pb-3" id="search-box">
       <h1>Find your cup...</h1>
+      <div className="row justify-content-center">
+        <div className="col-8 col-md-4 pb-md-4 pb-0">
+          <input type="text" id="postcode-box" className="form-control" placeholder="Postcode" onChange={(e) => setPostcodeSearch(e.target.value)}/>
+        </div>
+      </div>
       <div className="row">
-        <div className="d-none d-md-block col-md-2 ">
+        <div className="d-none d-md-block col-md-4 ">
           <label htmlFor="coffee-choice">Drink Type</label>
         </div>
-        <div className="d-none d-md-block col-md-2">
-          <label htmlFor="postcode-box">Postcode</label>
-        </div>
-        <div className="d-none d-md-block col-md-2">
+        <div className="d-none d-md-block col-md-4">
           <label htmlFor="min-rating-choice">Min Rating</label>
         </div>
-        <div className="d-none d-md-block col-md-2">
+        <div className="d-none d-md-block col-md-4">
           <label htmlFor="min-rating-choice">Price</label>
         </div>
       </div>
-      <form className="row ps-3">
-        <div className = "col-12 col-md-2 mb-2 m-md-0">
+      <form>
+        <div className = "row mb-3">
+        <div className = "col-12 col-md-4 mb-2 m-md-0">
           <select className="form-select" id="coffee-choice" defaultValue = "Any">
             <option value="Any">Any Drink Type</option>
             <option value="Latte">Latte</option>
@@ -28,10 +53,7 @@ const Home = () => {
             <option value="Mocha">Mocha</option>
           </select>
         </div>
-        <div className="col-12 col-md-2 mb-2 m-md-0">
-          <input type="text" id="postcode-box" className="form-control" placeholder="Postcode"/>
-        </div>
-        <div className="col-12 col-md-2 mb-2 m-md-0">
+        <div className="col-12 col-md-4 mb-2 m-md-0">
           <select className="form-select" id="min-rating-choice" defaultValue = "Any">
             <option value = "Any">Any Rating</option>
             <option value="1">&#9733;</option>
@@ -41,16 +63,22 @@ const Home = () => {
             <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
           </select>
         </div>
-        <div className="col-12 col-md-2 mb-2 m-md-0">
+        <div className="col-12 col-md-4 mb-2 m-md-0">
           <select className="form-select" id="price-rating-choice" defaultValue = "Any">
             <option value = "Any">Any Price</option>
             <option value="1">£</option>
             <option value="2">£/££</option>
             <option value="3">£/££/£££</option>
           </select>
+          </div>
         </div>
-        <div className="col-12 col-md-4 mb-3">
-          <button type="button" className="btn btn-outline-dark col-10 col-md-12" id="search-button">Find My Cup!</button>
+        <div className="row justify-content-center">
+          <div className="col-12 col-md-6 mt-5">
+            <button type="button" className="btn btn-outline-dark col-10 col-md-12" id="search-button" data-testid="location-search-button" onClick={handleSearch}>Find My Cup!</button>
+            {postcodeError && <div className="text-danger">
+              {postcodeError}
+            </div>}
+          </div>
         </div>
       </form>
       <div className="row p-4 justify-content-center">
@@ -66,14 +94,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <SearchResult />
-      <SearchResult />
-      <SearchResult />  
-      <SearchResult />  
-      <SearchResult /> 
-      <SearchResult />  
-      <SearchResult />  
-      <SearchResult />  
+      {locationResults &&
+        locationResults.map((locationInfo, index) => (
+        <SearchResult locationInfo={locationInfo} key = {index} />
+        ))
+      }
     </div>
   )
 }

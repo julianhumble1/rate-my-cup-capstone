@@ -16,7 +16,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
 
     return (
         <>
-            <nav className="navbar navbar-expand-md container-fluid fixed-top" id = "header">
+            <nav className="navbar navbar-expand-md container-fluid" id = "header">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
                         <img src="coffee-logo.png" alt="Logo" width="60" height="48" />
