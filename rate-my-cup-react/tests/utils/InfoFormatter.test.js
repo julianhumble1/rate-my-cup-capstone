@@ -53,7 +53,6 @@ describe("Info formatter tests", () => {
 
         it("should format location results correctly with stubbed formatOpeningTimes if object is valid", () => {
             // Arrange
-
             // Act
             const actual = InfoFormatter.formatLocationResults(testPoi)
             // Assert
@@ -64,7 +63,38 @@ describe("Info formatter tests", () => {
                 url: "https://testlocation.com",
                 openingHours: []
             })
+        })
 
+        it("should return a name of N/A if no name is provided", () => {
+            // Arrange
+            const noNamePoi = { ...testPoi }
+            delete noNamePoi.name
+            // Act
+            const actual = InfoFormatter.formatLocationResults(noNamePoi)
+            // Assert
+            expect(actual).to.deep.equal({
+                name: "N/A",
+                address: "123 Test St",
+                phone: "123-456-7890",
+                url: "https://testlocation.com",
+                openingHours: []
+            })
+        })
+
+        it("should return an address of N/A if no address is provided", () => {
+            // Arrange
+            const noAddressPoi = { ...testPoi }
+            delete noAddressPoi.address
+            // Act
+            const actual = InfoFormatter.formatLocationResults(noAddressPoi)
+            // Assert
+            expect(actual).to.deep.equal({
+                name: "Test Location",
+                address: "N/A",
+                phone: "123-456-7890",
+                url: "https://testlocation.com",
+                openingHours: []
+            })
         })
     })
 })
