@@ -3,9 +3,10 @@ import Registration from "./components/Registration.jsx"
 import Header from "./components/Header.jsx"
 import Login from "./components/Login.jsx"
 import Home from "./components/Home.jsx"
+import LocationDetails from "./components/LocationDetails.jsx"
 import { useEffect, useState } from "react"
 
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from "react-router-dom"
 
 function App() {
 
@@ -41,6 +42,10 @@ function App() {
         <Route
           path="/home"
           element={<Home />}
+        />
+        <Route
+          path="/location/:id"
+          element={<LocationDetails />}
         />
       </Routes>
     </Router>

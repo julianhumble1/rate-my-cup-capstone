@@ -11,5 +11,15 @@ export default class CoffeeService {
             throw new Error(error.message)
         };
     }
+
+    static getLocationDetails = async (id) => {
+        try {
+            const response = await axios.get(`https://api.tomtom.com/search/2/place.json?entityId=${id}&key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&apiVersion=1&openingHours=nextSevenDays`)
+            return response.data.results[0].poi
+        } catch (error) {
+            console.log(error)
+            throw new Error(error.message)
+        }
+    }
 }
 

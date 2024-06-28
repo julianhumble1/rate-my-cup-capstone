@@ -19,7 +19,7 @@ const Home = () => {
     } catch (e) {
       if (e.message === "Request failed with status code 400") {
         setPostcodeError("Invalid postcode. Please ensure postcode is valid before trying again")
-      }
+      } else setPostcodeError(e.message)
     }
   }
 
@@ -95,7 +95,7 @@ const Home = () => {
       </div>
       {locationResults &&
         locationResults.map((locationInfo, index) => (
-        <SearchResult locationInfo={locationInfo} key = {index} />
+        <SearchResult locationInfo={locationInfo} key={index} />
         ))
       }
     </div>
