@@ -17,7 +17,7 @@ export default class InfoFormatter {
     }
 
     static formatOpeningTimes = (poi) => {
-        let openingHoursObject
+        let openingHoursObject;
         try {
             openingHoursObject = poi.openingHours.timeRanges
         } catch {
