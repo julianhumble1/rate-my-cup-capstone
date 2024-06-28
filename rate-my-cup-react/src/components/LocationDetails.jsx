@@ -7,10 +7,10 @@ import InfoFormatter from "../utils/InfoFormatter.js"
 const LocationDetails = () => {
 
     const locationID = useParams().id;
-
     const [loading, setLoading] = useState(true)
 
     const [locationInfo, setLocationInfo] = useState()
+    const [locationInfoError, setLocationInfoError] = useState("")
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +20,7 @@ const LocationDetails = () => {
                 setLocationInfo(formatted)
             } catch (e) {
                 console.log(e)
+                setLocationInfoError(e.message)
             } finally {
                 setLoading(false)
             }
@@ -32,8 +33,10 @@ const LocationDetails = () => {
        <div className="container text-center rounded-2 pb-3" id="location-box">
            {!loading && <>
                <div className="fs-2 fw-bold">{locationInfo.name}</div>
+               {locationInfoError &&
+                    <div className="text-danger">{locationInfoError}</div>}
                     <div className="row">
-                        <div className=" col-3">
+                        <div className="col-3 d-none d-md-block">
                             <div className="rounded boxes h-100 ">
                                 <div>Opening Hours</div>
                                 {locationInfo.openingHours !== "N/A" &&
@@ -53,16 +56,16 @@ const LocationDetails = () => {
                                 }
                             </div>
                        </div>
-                    <div className="col-9 pe-0 justify-content-center">
-                        <div className="row w-100 h-50 ">
+                    <div className="col-md-9 col-12 pe-0 justify-content-center">
+                        <div className="row w-100 h-50">
                            <div className="col-8 h-100 p-1 pt-0">
                                <div className="boxes rounded h-100 align-content-center">
                                     <div className = "fs-3 h-50">&#9733;&#9733;&#9733;&#9733;</div>
                                     <div>(36 Rates)</div>
                                </div>
                             </div>
-                            <div className="col-4 align-content-center">
-                                <button className="btn btn-outline-dark" id="rate-a-cup-here">
+                            <div className="col align-content-center ">
+                                <button className="btn btn-outline-dark col-12" id="rate-a-cup-here">
                                     Rate a cup at this location
                                 </button>
                             </div>

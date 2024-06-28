@@ -34,9 +34,25 @@ describe("Coffee Service tests", () => {
                 }
             })
             // Act
-            const responseData = await CoffeeService.locationSearch("TW18 2DF") 
+            const responseData = await CoffeeService.locationSearch("TW18 2DF")
             // Assert
-            expect(responseData).to.deep.equal({message: "Successful"})
+            expect(responseData).to.deep.equal({ message: "Successful" })
+        })
+    })
+
+    describe("getLocationDetails tests", () => {
+        it("should throw an error when axios request fails", async () => {
+            // Arrange
+            axios.get.mockRejectedValue({
+                message: "Axios request failed"
+            })
+            // Act // Assert
+            try {
+                await CoffeeService.getLocationDetails("invalidId");
+                throw new Error("Expected register to throw an error, but it did not");
+            } catch (error) {
+                expect(error.message).toBe("Axios request failed");
+            }
         })
     })
 })
