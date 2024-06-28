@@ -112,5 +112,21 @@ describe("Info formatter tests", () => {
                 openingHours: []
             })
         })
+
+        it("should return a url of N/A if no url is provided", () => {
+            // Arrange
+            const noUrlPoi = { ...testPoi }
+            delete noUrlPoi.url
+            // Act
+            const actual = InfoFormatter.formatLocationResults(noUrlPoi)
+            // Assert
+            expect(actual).to.deep.equal({
+                name: "Test Location",
+                address: "123 Test St",
+                phone: "123-456-7890",
+                url: "N/A",
+                openingHours: []
+            })
+        })
     })
 })
