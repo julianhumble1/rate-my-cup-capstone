@@ -6,7 +6,6 @@ export default class InfoFormatter {
         const phone = poi.phone ?? "N/A";
         const url = poi.url ?? "N/A";
         const openingHours = InfoFormatter.formatOpeningTimes(poi)
-        console.log(openingHours)
         return {
             name: name,
             address : address,
