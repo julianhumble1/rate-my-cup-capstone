@@ -54,5 +54,20 @@ describe("Coffee Service tests", () => {
                 expect(error.message).toBe("Axios request failed");
             }
         })
+
+        it("should return the expected data when axios request is successful", async () => {
+            // Arrange
+            axios.get.mockResolvedValue({
+                data: {
+                    results: [{
+                        poi: {message: "Successful"}
+                    }]
+                }
+            })
+            // Act
+            const responseData = await CoffeeService.getLocationDetails("Q-WhI_pokyksoCGaVEvxaQ")
+            // Assert
+            expect(responseData).to.deep.equal({ message: "Successful" })
+        })
     })
 })
