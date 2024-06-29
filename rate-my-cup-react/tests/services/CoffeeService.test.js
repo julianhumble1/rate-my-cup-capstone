@@ -59,9 +59,7 @@ describe("Coffee Service tests", () => {
             // Arrange
             axios.get.mockResolvedValue({
                 data: {
-                    results: [{
-                        poi: {message: "Successful"}
-                    }]
+                    results: [ {message: "Successful"}]
                 }
             })
             // Act

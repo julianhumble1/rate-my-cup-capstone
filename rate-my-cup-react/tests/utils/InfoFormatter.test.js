@@ -35,14 +35,19 @@ describe("Info formatter tests", () => {
 
     describe("format location results tests", () => {
 
-        const testPoi = {
-        name: 'Test Location',
-        address: { freeformAddress: '123 Test St' },
-        phone: '123-456-7890',
-        url: 'https://testlocation.com'
-        };
+        let testPoi
 
+        
         beforeEach(() => {
+            testPoi = {
+                poi: {
+                    name: 'Test Location',
+                    phone: '123-456-7890',
+                    url: 'https://testlocation.com'    
+                },
+                address: { freeformAddress: '123 Test St' },
+            };
+
             vi.spyOn(InfoFormatter, "formatOpeningTimes").mockReturnValue([])
         })
 
@@ -68,7 +73,7 @@ describe("Info formatter tests", () => {
         it("should return a name of N/A if no name is provided", () => {
             // Arrange
             const noNamePoi = { ...testPoi }
-            delete noNamePoi.name
+            delete noNamePoi.poi.name
             // Act
             const actual = InfoFormatter.formatLocationResults(noNamePoi)
             // Assert
@@ -100,7 +105,7 @@ describe("Info formatter tests", () => {
         it("should return an phone of N/A if no phone is provided", () => {
             // Arrange
             const noPhonePoi = { ...testPoi }
-            delete noPhonePoi.phone
+            delete noPhonePoi.poi.phone
             // Act
             const actual = InfoFormatter.formatLocationResults(noPhonePoi)
             // Assert
@@ -116,7 +121,7 @@ describe("Info formatter tests", () => {
         it("should return a url of N/A if no url is provided", () => {
             // Arrange
             const noUrlPoi = { ...testPoi }
-            delete noUrlPoi.url
+            delete noUrlPoi.poi.url
             // Act
             const actual = InfoFormatter.formatLocationResults(noUrlPoi)
             // Assert

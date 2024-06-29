@@ -1,11 +1,11 @@
 export default class InfoFormatter {
 
-    static formatLocationResults = (poi) => {
-        const name = poi.name ?? "N/A";
-        const address = poi.address?.freeformAddress ?? "N/A";
-        const phone = poi.phone ?? "N/A";
-        const url = poi.url ?? "N/A";
-        const openingHours = InfoFormatter.formatOpeningTimes(poi)
+    static formatLocationResults = (result) => {
+        const name = result.poi.name ?? "N/A";
+        const address = result.address?.freeformAddress ?? "N/A";
+        const phone = result.poi.phone ?? "N/A";
+        const url = result.poi.url ?? "N/A";
+        const openingHours = InfoFormatter.formatOpeningTimes(result.poi)
         return {
             name: name,
             address : address,

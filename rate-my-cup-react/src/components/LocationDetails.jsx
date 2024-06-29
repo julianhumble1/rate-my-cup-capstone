@@ -17,7 +17,7 @@ const LocationDetails = () => {
             try {
                 const response = await CoffeeService.getLocationDetails(locationID)
                 const formatted = InfoFormatter.formatLocationResults(response)
-                console.log(formatted)
+                
                 setLocationInfo(formatted)
             } catch (e) {
                 console.log(e)
@@ -31,13 +31,13 @@ const LocationDetails = () => {
 
 
    return (
-       <div className="container text-center rounded-2 pb-3" id="location-box">
+       <div className="container text-center rounded-2 pb-3 justify-content-center" id="location-box">
            {!loading && <>
                <div className="fs-2 fw-bold">{locationInfo.name}</div>
                {locationInfoError &&
                     <div className="text-danger">{locationInfoError}</div>}
-                    <div className="row">
-                        <div className="col-3 d-none d-md-block">
+                    <div className="row justify-content-center">
+                        <div className="col-3 d-none d-md-block ">
                             <div className="rounded boxes h-100 ">
                                 <div>Opening Hours</div>
                                 {locationInfo.openingHours !== "N/A" &&
@@ -57,7 +57,7 @@ const LocationDetails = () => {
                                 }
                             </div>
                        </div>
-                    <div className="col-md-9 col-12 pe-0 justify-content-center">
+                    <div className="col-md-9 col-12 pe-0 ">
                         <div className="row w-100 h-50">
                            <div className="col-8 h-100 p-1 pt-0">
                                <div className="boxes rounded h-100 align-content-center">
@@ -86,8 +86,16 @@ const LocationDetails = () => {
                                </div>
                             </div>
                         </div>      
+                   </div>
+               </div>
+               {(locationInfo.address !== "N/A") &&
+                   
+                <div className="row justify-content-center p-md-3 pt-4 m-2">
+                    <div className="boxes rounded">
+                        Address : {locationInfo.address}
                     </div>
                 </div>
+               }
            </>}
     </div>
   )
