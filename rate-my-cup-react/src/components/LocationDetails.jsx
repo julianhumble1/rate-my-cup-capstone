@@ -17,6 +17,7 @@ const LocationDetails = () => {
             try {
                 const response = await CoffeeService.getLocationDetails(locationID)
                 const formatted = InfoFormatter.formatLocationResults(response)
+                console.log(formatted)
                 setLocationInfo(formatted)
             } catch (e) {
                 console.log(e)
