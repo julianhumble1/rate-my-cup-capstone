@@ -1,0 +1,11 @@
+POST http://localhost:3001/review/new
+Content-Type: application/json 
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODA3NzlkZGU4ODNiYjFmMjc5NWRkNyIsImlhdCI6MTcxOTY5NTI3MSwiZXhwIjoxNzE5NzgxNjcxfQ.X0jph6Mk4-0pCV3hithCk_GeQyzlzEV_gP4oqggE_AU
+
+{
+    "drinkType": "Latte",
+    "rating": 4,
+    "price": 2,
+    "locationId": "Q-WhI_pokyksoCGaVEvxaQ",
+    "comment" : "very nice"
+}
