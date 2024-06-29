@@ -89,4 +89,18 @@ describe("Location Details page tests", () => {
         // Assert
         expect(address).toBeInTheDocument()
     })
+
+    it("should display unavailable opening hours if response returns N/A", async () => {
+        // Arrange
+        const noOpeningHours = { ...successfulResponse }
+        noOpeningHours.openingHours = "N/A"
+        InfoFormatter.formatLocationResults.mockReturnValue(noOpeningHours)
+        render(
+            <LocationDetails />
+        )
+        // Act
+        const unavailable = await screen.findByText("Unavailable")
+        // Assert
+        expect(unavailable).toBeInTheDocument()
+    })
 })
