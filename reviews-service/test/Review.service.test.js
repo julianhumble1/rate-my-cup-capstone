@@ -47,9 +47,23 @@ describe("Review service tests", () => {
             reviewStub.returns(newReviewDoc)
             saveStub.returns(newReviewDoc)
             // Act
-            const result = await reviewService.addNewReview(newReview)
+            const result = await reviewService.addNewReview(newReview, userId)
             // Arrange
             expect(result).to.contain(newReviewDoc)
+        })
+
+        it("should throw expected error when new document  save fails", async () => {
+            // Arrange
+            const invalidReview = {}
+            const error = new Error("Failed to save")
+            saveStub.throws(error) 
+            // Act
+            try {
+                await reviewService.addNewReview(invalidReview, userId)
+                expect.fail("Expected error was not thrown")
+            } catch (e) {
+                expect(e.message).to.equal("Failed to save to database");
+            } 
         })
 
 
