@@ -103,4 +103,16 @@ describe("Location Details page tests", () => {
         // Assert
         expect(unavailable).toBeInTheDocument()
     })
+
+    it("should display  opening hours if response is successful", async () => {
+        // Arrange
+        InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
+        render(
+            <LocationDetails />
+        )
+        // Act
+        const unavailable = screen.queryByText("Unavailable")
+        // Assert
+        expect(unavailable).not.toBeInTheDocument()
+    })
 })
