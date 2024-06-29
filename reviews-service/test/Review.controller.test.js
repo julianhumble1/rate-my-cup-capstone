@@ -79,9 +79,18 @@ describe("Review Controller tests", () => {
             expect(res.status.calledWith(201)).to.be.true;
         })
 
-        it("should respond with 500 status code if service throws internal system error", async () => {
+        it("should respond with 400 status code if unable to create new review document", async () => {
             // Arrange
-            reviewServices.addNewReview.rejects(new Error("Internal system error"));
+            reviewServices.addNewReview.rejects(new Error("Failed to create Review document"));
+            // Act
+            await reviewController.addNewReview(req, res)
+            // Assert
+            expect(res.status.calledWith(400)).to.be.true;
+        })
+
+        it("should respond with 500 status code if internal system error", async () => {
+            // Arrange
+            reviewServices.addNewReview.rejects(new Error("Failed to save to database"));
             // Act
             await reviewController.addNewReview(req, res)
             // Assert

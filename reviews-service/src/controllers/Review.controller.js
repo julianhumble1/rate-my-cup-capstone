@@ -16,7 +16,11 @@ export default class ReviewController {
             const newReview = await this.#service.addNewReview(req.body, req.userId)
             return res.status(201).json(newReview)
         } catch (error) {
-            return res.status(500).json(error.message)
+            if (error.message === "Failed to create Review document") {
+                return res.status(400).json(error.message)
+            } else {
+                return res.status(500).json(error.message)
+            }
         }
     }
 

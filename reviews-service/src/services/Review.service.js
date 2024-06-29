@@ -14,8 +14,12 @@ export default class ReviewService {
                 userId: userId
             })
         } catch (e) {
-            throw new Error("Internal system error")
+            throw new Error("Failed to create Review document")
         }
-        return await review.save();
+        try {
+            return await review.save();
+        } catch (e) {
+            throw new Error("Failed to save to database")
+        }
     }
 }
