@@ -87,15 +87,12 @@ const LocationDetails = () => {
                             </div>
                         </div>      
                    </div>
-               </div>
-               {(locationInfo.address !== "N/A") &&
-                   
+                </div>
                 <div className="row justify-content-center p-md-3 pt-4 m-2">
                     <div className="boxes rounded">
-                        Address : {locationInfo.address}
+                        Address: {locationInfo.address}
                     </div>
                 </div>
-               }
            </>}
     </div>
   )
