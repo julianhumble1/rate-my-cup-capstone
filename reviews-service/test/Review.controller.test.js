@@ -78,5 +78,14 @@ describe("Review Controller tests", () => {
             // Assert
             expect(res.status.calledWith(201)).to.be.true;
         })
+
+        it("should respond with 500 status code if service throws internal system error", async () => {
+            // Arrange
+            reviewServices.addNewReview.rejects(new Error("Internal system error"));
+            // Act
+            await reviewController.addNewReview(req, res)
+            // Assert
+            expect(res.status.calledWith(500)).to.be.true;
+        })
     })
 })
