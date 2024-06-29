@@ -31,7 +31,6 @@ export default class UserRoutes {
             "/login",
             [...UserValidator.validateEmail(), ...UserValidator.validatePassword()],
             this.#controller.loginUser
-
         )
     }
 
