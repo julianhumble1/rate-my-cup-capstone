@@ -65,4 +65,16 @@ describe("Location Details page tests", () => {
         // Assert
         expect(url).toBeInTheDocument()
     })
+
+    it("should display the phone number of the coffee shop returned from the service call", async () => {
+        // Arrange
+        InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
+        render(
+            <LocationDetails />
+        )
+        // Act
+        const phone = await screen.findByText("Phone Number: 07123456789")
+        // Assert
+        expect(phone).toBeInTheDocument()
+    })
 })
