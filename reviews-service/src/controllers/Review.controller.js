@@ -10,7 +10,6 @@ export default class ReviewController {
     }
 
     addNewReview = async (req, res) => {
-        
         const sentResponse = ReviewValidator.handleValidationErrors(req, res);
         if (sentResponse) return;
         try {
