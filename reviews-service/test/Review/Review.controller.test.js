@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import sinon from "sinon";
 
-import ReviewController from "../src/controllers/Review.controller.js";
-import ReviewValidator from "../src/middleware/ReviewValidator.js";
+import ReviewController from "../../src/controllers/Review.controller.js";
+import ReviewValidator from "../../src/middleware/ReviewValidator.js";
 
 describe("Review Controller tests", () => {
 

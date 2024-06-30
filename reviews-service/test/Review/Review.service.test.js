@@ -1,8 +1,8 @@
 import { expect } from "chai";
 import sinon from "sinon";
 
-import Review from "../src/models/Review.model.js";
-import ReviewService from "../src/services/Review.service.js";
+import Review from "../../src/models/Review.model.js";
+import ReviewService from "../../src/services/Review.service.js";
 
 describe("Review service tests", () => {
     let reviewService;
