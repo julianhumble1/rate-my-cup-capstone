@@ -75,6 +75,18 @@ describe("addNewReview integration tests", () => {
             // Assert
             expect(response.body.drinkType).to.equal("Mocha");
         })
+
+        it("should respond with code 400 if bad request - no drinkType", async () => {
+            // Arrange
+            const invalidReview = { ...newReview }
+            delete invalidReview.drinkType;
+            // Act
+            const response = await request.post("/review/new").set("x-access-token",accessToken).send(invalidReview)
+            // Assert
+            expect(response.status).to.equal(400);
+
+
+        })
     })
 
 })
