@@ -67,6 +67,14 @@ describe("addNewReview integration tests", () => {
             // Assert
             expect(response.status).to.equal(201);
         })
+
+        it("should respond with the created review if successful", async () => {
+            // Arrange
+            // Act
+            const response = await request.post("/review/new").set("x-access-token",accessToken).send(newReview)
+            // Assert
+            expect(response.body.drinkType).to.equal("Mocha");
+        })
     })
 
 })
