@@ -104,6 +104,15 @@ describe("addNewReview integration tests", () => {
             // Assert
             expect(response.status).to.equal(400);
         })
+
+        it("should respond with code 400 if bad request - invalid rating", async () => {
+            // Arrange
+            const invalidReview = { ...newReview, rating: 6 }
+            // Act
+            const response = await request.post("/review/new").set("x-access-token",accessToken).send(invalidReview)
+            // Assert
+            expect(response.status).to.equal(400);
+        })
     })
 
 })
