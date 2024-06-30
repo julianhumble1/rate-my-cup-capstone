@@ -84,8 +84,15 @@ describe("addNewReview integration tests", () => {
             const response = await request.post("/review/new").set("x-access-token",accessToken).send(invalidReview)
             // Assert
             expect(response.status).to.equal(400);
+        })
 
-
+        it("should respond with code 400 if bad request - invalid drinkType", async () => {
+            // Arrange
+            const invalidReview = { ...newReview, drinkType: "badDrink" }
+            // Act
+            const response = await request.post("/review/new").set("x-access-token",accessToken).send(invalidReview)
+            // Assert
+            expect(response.status).to.equal(400);
         })
     })
 
