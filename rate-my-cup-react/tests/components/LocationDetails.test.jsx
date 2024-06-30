@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react"
 import CoffeeService from "../../src/services/CoffeeService.js";
 import { afterEach, beforeEach, describe } from "vitest";
 import InfoFormatter from "../../src/utils/InfoFormatter.js";
+import { MemoryRouter } from "react-router-dom";
 
 describe("Location Details page tests", () => {
     
@@ -46,7 +47,9 @@ describe("Location Details page tests", () => {
         // Arrange
         InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
         render(
-            <LocationDetails />
+            <MemoryRouter>
+                <LocationDetails />
+            </MemoryRouter>
         )
         // Act
         const name = await screen.findByText("Test Coffee Shop")
@@ -58,7 +61,9 @@ describe("Location Details page tests", () => {
         // Arrange
         InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
         render(
-            <LocationDetails />
+            <MemoryRouter>
+                <LocationDetails />
+            </MemoryRouter>
         )
         // Act
         const url = await screen.findByText("www.test.com")
@@ -70,7 +75,9 @@ describe("Location Details page tests", () => {
         // Arrange
         InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
         render(
-            <LocationDetails />
+            <MemoryRouter>
+                <LocationDetails />
+            </MemoryRouter>
         )
         // Act
         const phone = await screen.findByText("Phone Number: 07123456789")
@@ -82,7 +89,9 @@ describe("Location Details page tests", () => {
         // Arrange
         InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
         render(
-            <LocationDetails />
+            <MemoryRouter>
+                <LocationDetails />
+            </MemoryRouter>
         )
         // Act
         const address = await screen.findByText("Address: 123 Test")
@@ -96,7 +105,9 @@ describe("Location Details page tests", () => {
         noOpeningHours.openingHours = "N/A"
         InfoFormatter.formatLocationResults.mockReturnValue(noOpeningHours)
         render(
-            <LocationDetails />
+            <MemoryRouter>
+                <LocationDetails />
+            </MemoryRouter>
         )
         // Act
         const unavailable = await screen.findByText("Unavailable")
@@ -104,15 +115,30 @@ describe("Location Details page tests", () => {
         expect(unavailable).toBeInTheDocument()
     })
 
-    it("should display  opening hours if response is successful", async () => {
+    it("should display opening hours if response is successful", async () => {
         // Arrange
         InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
         render(
-            <LocationDetails />
+            <MemoryRouter>
+                <LocationDetails />
+            </MemoryRouter>
         )
         // Act
         const unavailable = screen.queryByText("Unavailable")
         // Assert
         expect(unavailable).not.toBeInTheDocument()
     })
+
+    // it("should display network error message if service call fails", async () => {
+    //     // Arrange
+    //     const error = new Error("service error")
+    //     CoffeeService.getLocationDetails.mockRejectedValue(error)
+    //     render(
+    //         <LocationDetails />
+    //     )
+    //     // Act
+    //     const errorMessage = screen.getByText("service error")
+    //     // Assert
+    //     expect(errorMessage).toBeInTheDocument()
+    // })
 })

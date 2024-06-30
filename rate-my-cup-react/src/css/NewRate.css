@@ -1,0 +1,17 @@
+#new-rate-box {
+    margin: auto;
+    color: #fefae0;
+    background-color: #DDA15E;
+    max-width: 1200px;
+    margin-top: 50px;
+}
+
+#submit-button{
+    border-color: #606c38;
+    color: #fefae0;
+    background-color: #606c38
+}
+
+#submit-button:hover {
+    background-color: #283618;
+}

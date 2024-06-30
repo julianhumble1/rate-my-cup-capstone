@@ -39,7 +39,7 @@ const Home = () => {
           <label htmlFor="min-rating-choice">Min Rating</label>
         </div>
         <div className="d-none d-md-block col-md-4">
-          <label htmlFor="min-rating-choice">Price</label>
+          <label htmlFor="min-price-choice">Price</label>
         </div>
       </div>
       <form>

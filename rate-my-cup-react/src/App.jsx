@@ -7,6 +7,7 @@ import LocationDetails from "./components/LocationDetails.jsx"
 import { useEffect, useState } from "react"
 
 import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from "react-router-dom"
+import NewRate from "./components/NewRate.jsx"
 
 function App() {
 
@@ -46,6 +47,14 @@ function App() {
         <Route
           path="/location/:id"
           element={<LocationDetails />}
+        />
+        <Route
+          path="/rate/new"
+          element={<NewRate />}
+        />
+        <Route
+          path="/rate/new/:locationId"
+          element={<NewRate />}
         />
       </Routes>
     </Router>

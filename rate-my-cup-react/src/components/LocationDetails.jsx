@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import "../css/LocationDetails.css"
 import CoffeeService from "../services/CoffeeService.js"
 import InfoFormatter from "../utils/InfoFormatter.js"
 
 const LocationDetails = () => {
 
-    const locationID = useParams().id;
+    const locationId = useParams().id;
     const [loading, setLoading] = useState(true)
 
     const [locationInfo, setLocationInfo] = useState()
@@ -15,9 +15,8 @@ const LocationDetails = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await CoffeeService.getLocationDetails(locationID)
+                const response = await CoffeeService.getLocationDetails(locationId)
                 const formatted = InfoFormatter.formatLocationResults(response)
-                
                 setLocationInfo(formatted)
             } catch (e) {
                 console.log(e)
@@ -27,7 +26,7 @@ const LocationDetails = () => {
             }
         }
         fetchData();
-    }, [locationID])
+    }, [locationId])
 
 
    return (
@@ -66,9 +65,9 @@ const LocationDetails = () => {
                                </div>
                             </div>
                             <div className="col align-content-center ">
-                                <button className="btn btn-outline-dark col-12" id="rate-a-cup-here">
+                                <Link to={`/rate/new/${locationId}`} className="btn btn-outline-dark col-12" id="rate-a-cup-here">
                                     Rate a cup at this location
-                                </button>
+                                </Link>
                             </div>
                         </div>
                         <div className="row w-100 h-50 justify-content-center">
