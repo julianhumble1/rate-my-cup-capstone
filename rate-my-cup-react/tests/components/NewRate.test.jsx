@@ -48,7 +48,23 @@ describe("New Rate page tests", () => {
         await userEvent.click(submitButton)
         const successMessage = await screen.findByText("New Rate successfully created!")
         // Assert
-        expect(successMessage).toBeInTheDocument();
-        
+        expect(successMessage).toBeInTheDocument();     
+    })
+
+    it("should render error message if add fails", async () => {
+        // Arrange
+        await userEvent.selectOptions(drinkChoice, "Latte")
+        await userEvent.selectOptions(ratingChoice, "1")
+        await userEvent.selectOptions(priceChoice, "1")
+
+        const error = new Error("Failed to create new Rate")
+        ReviewService.newReview.mockRejectedValue(error)
+
+        // Act
+        await userEvent.click(submitButton)
+        const failMessage = await screen.findByText("Failed to create new Rate")
+
+        // Assert
+        expect(failMessage).toBeInTheDocument();
     })
 })
