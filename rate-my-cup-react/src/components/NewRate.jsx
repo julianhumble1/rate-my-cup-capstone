@@ -26,7 +26,6 @@ const NewRate = () => {
             await ReviewService.newReview(locationId, drinkType, rating, price, comment, localStorage.getItem("accessToken"))
             setSuccessfulCreate("New Rate successfully created!")
         } catch (e) {
-            console.log(e.message)
             setSuccessfulCreate(e.message)
         }
     }
@@ -56,7 +55,7 @@ const NewRate = () => {
             <form onSubmit={handleSubmit}> 
                 <div className="row mb-3" >
                     <div className = "col-12 col-md-4 mb-2 m-md-0 ">
-                        <select className="form-select" id="drink-choice" required defaultValue={""} onChange={(e) => setDrinkType(e.target.value)}>
+                        <select className="form-select" id="drink-choice" required defaultValue={""} onChange={(e) => setDrinkType(e.target.value)} data-testid="drink-choice">
                             <option value="" disabled>Drink Type</option>
                             {drinkOptions.map((drinkOption, index) => (
                             <option key={index} value={drinkOption}>{drinkOption}</option>
@@ -64,7 +63,7 @@ const NewRate = () => {
                         </select>
                     </div>
                     <div className="col-12 col-md-4 mb-2 m-md-0">
-                            <select className="form-select" id="rating-choice" required defaultValue={""} onChange={(e) => setRating(e.target.value)}>
+                            <select className="form-select" id="rating-choice" required defaultValue={""} onChange={(e) => setRating(e.target.value)} data-testid="rating-choice">
                             <option value="" disabled >Rating</option>
                             {ratings.map((rating, index) => (
                                 <option key={index} value={rating}>{"★".repeat(rating)}</option>
@@ -72,7 +71,7 @@ const NewRate = () => {
                         </select>
                     </div>
                     <div className="col-12 col-md-4 mb-2 m-md-0">
-                        <select className="form-select" id="price-choice" required defaultValue={""} onChange={(e) => setPrice(e.target.value)}>
+                        <select className="form-select" id="price-choice" required defaultValue={""} onChange={(e) => setPrice(e.target.value)} data-testid="price-choice">
                             <option value="" disabled>Price</option>
                             {prices.map((price, index) => (
                                 <option key={index} value={price}>{"£".repeat(price)}</option>

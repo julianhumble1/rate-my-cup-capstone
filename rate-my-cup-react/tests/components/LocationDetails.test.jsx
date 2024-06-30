@@ -1,6 +1,5 @@
 import LocationDetails from "../../src/components/LocationDetails.jsx"
 import { render, screen } from "@testing-library/react"
-import CoffeeService from "../../src/services/CoffeeService.js";
 import { afterEach, beforeEach, describe } from "vitest";
 import InfoFormatter from "../../src/utils/InfoFormatter.js";
 import { MemoryRouter } from "react-router-dom";
