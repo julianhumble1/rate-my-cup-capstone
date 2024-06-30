@@ -76,4 +76,22 @@ describe("New Rate page tests", () => {
         // Assert
         expect(submitButton).toBeDisabled();
     })
+
+    it("should disable submit button if rating choice is empty", async () => {
+        // Arrange
+        await userEvent.selectOptions(drinkChoice, "Latte")
+        await userEvent.selectOptions(priceChoice, "1")
+        // Act
+        // Assert
+        expect(submitButton).toBeDisabled();
+    })
+
+    it("should disable submit button if price choice is empty", async () => {
+        // Arrange
+        await userEvent.selectOptions(drinkChoice, "Latte")
+        await userEvent.selectOptions(ratingChoice, "1")
+        // Act
+        // Assert
+        expect(submitButton).toBeDisabled();
+    })
 })
