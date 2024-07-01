@@ -13,3 +13,7 @@ https://api.tomtom.com/search/2/poiCategories.json?key=sT17166UsrgptIJQcPeXqLcIb
 # Obtain longitude and latitude from postcode for Staines
 
 https://api.tomtom.com/maps/orbis/places/geocode/TW182df.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&apiVersion=1
+
+###
+
+https://api.tomtom.com/search/2/place.json?entityId=Q-WhI_pokyksoCGaVEvxaQ&key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&apiVersion=1&openingHours=nextSevenDays
