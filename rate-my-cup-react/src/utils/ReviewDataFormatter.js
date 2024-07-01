@@ -19,7 +19,7 @@ export default class ReviewDataFormatter {
             return 0
         }
         let total = 0;
-        for (let i = 0; i < reviewsArray; i++) {
+        for (let i = 0; i < reviewsArray.length; i++) {
             total += reviewsArray[i].rating
         }
         const average = total / (reviewsArray.length)

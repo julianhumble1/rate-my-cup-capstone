@@ -45,7 +45,15 @@ describe("ReviewDataFormatter Tests", () => {
             const result = ReviewDataFormatter.calculateAverageRating([])
             // Assert
             expect(result).to.equal(0)
+        })
 
+        it("should return the rating of the drink if only 1 review in array", () => {
+            // Arrange
+            const testReview1 = { drinkType: "Latte", rating: 3 }
+            // Act
+            const result = ReviewDataFormatter.calculateAverageRating([testReview1])
+            // Assert
+            expect(result).to.equal(3)
         })
 
     })
