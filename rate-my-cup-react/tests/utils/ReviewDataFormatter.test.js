@@ -117,5 +117,16 @@ describe("ReviewDataFormatter Tests", () => {
             // Assert
             expect(result).to.equal(1)
         })
+
+        it("should return the mode if many reviews", () => {
+            // Arrange
+            const testReview1 = { drinkType: "Latte", rating: 3, price: 1 }
+            const testReview2 = { drinkType: "Latte", rating: 2, price: 2 }
+            const testReview3 = { drinkType: "Latte", rating: 2, price: 2 }
+            // Act
+            const result = ReviewDataFormatter.calculateModePrice([testReview1,testReview2, testReview3])
+            // Assert
+            expect(result).to.equal(2)
+        })
     })
 })
