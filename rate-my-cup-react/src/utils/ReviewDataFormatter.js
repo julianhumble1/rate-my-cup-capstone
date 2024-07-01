@@ -23,7 +23,7 @@ export default class ReviewDataFormatter {
             total += reviewsArray[i].rating
         }
         const average = total / (reviewsArray.length)
-        return average
+        return Math.round(average)
     }
 
 }
