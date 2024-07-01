@@ -20,4 +20,16 @@ describe("ReviewDataFormatter Tests", () => {
         // Assert
         expect(result.Latte).to.deep.equal([testReview1])
     })
+
+    it("should sort multiple results into their correct arrays", () => {
+        // Arrange
+        const testReview1 = { drinkType: "Latte" }
+        const testReview2 = {drinkType: "Espresso"}
+        const testReviewsArray = [testReview1, testReview2];
+        // Act
+        const result = ReviewDataFormatter.arrangeReviewsByDrink(testReviewsArray)
+        // Assert
+        expect(result.Latte).to.deep.equal([testReview1]);
+        expect(result.Espresso).to.deep.equal([testReview2]);
+    })
 })
