@@ -101,5 +101,20 @@ describe("Review service tests", () => {
             // Assert
             expect(result).to.deep.equal([])
         })
+
+        it("should return expected array when reviews are found", async () => {
+            // Arrange
+            const reviewResult1 = {
+                message: "Test1"
+            }
+            const reviewResult2 = {
+                message: "Test2"
+            }
+            reviewsStub.returns([reviewResult1, reviewResult2])
+            // Act
+            const result = await reviewService.getReviewsByLocation(locationId)
+            // Assert
+            expect(result).to.deep.equal([reviewResult1, reviewResult2])
+        })
     })
 })
