@@ -1,5 +1,5 @@
 import LocationDetails from "../../src/components/LocationDetails.jsx"
-import { render, screen } from "@testing-library/react"
+import { render, screen, act } from "@testing-library/react"
 import { afterEach, beforeEach, describe } from "vitest";
 import InfoFormatter from "../../src/utils/InfoFormatter.js";
 import { MemoryRouter } from "react-router-dom";
@@ -117,11 +117,13 @@ describe("Location Details page tests", () => {
     it("should display opening hours if response is successful", async () => {
         // Arrange
         InfoFormatter.formatLocationResults.mockReturnValue(successfulResponse)
-        render(
-            <MemoryRouter>
-                <LocationDetails />
-            </MemoryRouter>
-        )
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <LocationDetails />
+                </MemoryRouter>
+            )    
+        })
         // Act
         const unavailable = screen.queryByText("Unavailable")
         // Assert

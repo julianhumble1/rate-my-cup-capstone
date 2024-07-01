@@ -87,8 +87,8 @@ const LocationDetails = () => {
                         </div>      
                    </div>
                 </div>
-                <div className="row justify-content-center p-md-3 pt-4 m-2">
-                    <div className="boxes rounded">
+                <div className="row justify-content-center p-md-3 pt-4 m-1">
+                    <div className="boxes rounded p-2">
                         Address: {locationInfo.address}
                     </div>
                 </div>
