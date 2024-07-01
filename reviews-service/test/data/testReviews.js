@@ -20,7 +20,19 @@ const generateTestData = () => {
                 "comment": "very nice",
                 "userId": "6680779dde883bb1f2795dd7",
                 "__v": 0
+            },
+            {
+              
+                "_id":  "66807cbe72342a12d348d8c2",
+                "locationId": "nqvi2tr9SV6hE1ZshBVSQg",
+                "drinkType": "Latte",
+                "price": 3,
+                "rating": 3,
+                "comment": "",
+                "userId": "6680779dde883bb1f2795dd7",
+                "__v": 0 
             }
+            
         ],
         newReview: {
             "drinkType": "Mocha",

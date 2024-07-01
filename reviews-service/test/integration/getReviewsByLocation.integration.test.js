@@ -64,5 +64,21 @@ describe("getReviewsByLocation integration tests", () => {
             // Assert
             expect(response.status).to.equal(201)
         })
+
+        it("should respond with array of single result if only one result", async () => {
+            // Arrange
+            // Act
+            const response = await request.get(`/review/location?locationId=Q-WhI_pokyksoCGaVEvxaQ`)
+            // Assert
+            expect(response.body).to.deep.equal([testReviews[0]])
+        })
+
+        it("should respond with array of multiple results if multiple results", async () => {
+            // Arrange
+            // Act
+            const response = await request.get(`/review/location?locationId=nqvi2tr9SV6hE1ZshBVSQg`)
+            // Assert
+            expect(response.body).to.deep.equal([testReviews[1], testReviews[2]])
+        })
     })
 })
