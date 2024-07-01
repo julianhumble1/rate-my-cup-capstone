@@ -16,4 +16,7 @@ export default defineConfig({
     open: true,
     historyApiFallback: true, // This handles client-side routing
   },
+  build: {
+    outDir: 'dist', // Ensure this is the correct output directory
+  },
 })
