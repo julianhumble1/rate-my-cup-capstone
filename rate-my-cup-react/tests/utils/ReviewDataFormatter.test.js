@@ -10,4 +10,14 @@ describe("ReviewDataFormatter Tests", () => {
         // Assert
         expect(Object.keys(result).length).to.equal(8)
     })
+
+    it("should sort a single result into the correct array", () => {
+        // Arrange
+        const testReview1 = {drinkType: "Latte"}
+        const testReviewsArray = [testReview1];
+        // Act
+        const result = ReviewDataFormatter.arrangeReviewsByDrink(testReviewsArray)
+        // Assert
+        expect(result.Latte).to.deep.equal([testReview1])
+    })
 })
