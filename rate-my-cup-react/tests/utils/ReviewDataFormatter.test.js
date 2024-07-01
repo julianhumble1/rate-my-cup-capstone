@@ -56,5 +56,15 @@ describe("ReviewDataFormatter Tests", () => {
             expect(result).to.equal(3)
         })
 
+        it("should return the average rating of drinks if multiple reviews", () => {
+            // Arrange
+            const testReview1 = { drinkType: "Latte", rating: 4 }
+            const testReview2 = { drinkType: "Latte", rating: 2 }
+            // Act
+            const result = ReviewDataFormatter.calculateAverageRating([testReview1, testReview2])
+            // Assert
+            expect(result).to.equal(3)
+        })
+
     })
 })
