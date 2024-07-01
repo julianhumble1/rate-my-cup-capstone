@@ -80,5 +80,13 @@ describe("getReviewsByLocation integration tests", () => {
             // Assert
             expect(response.body).to.deep.equal([testReviews[1], testReviews[2]])
         })
+
+        it("should respond with an empty array if no results", async () => {
+            // Arrange
+            // Act
+            const response = await request.get(`/review/location?locationId=nonLocationId`)
+            // Assert
+            expect(response.body).to.deep.equal([])
+        })
     })
 })
