@@ -55,8 +55,6 @@ describe("addNewReview integration tests", () => {
             console.log("Error inserting")
             throw new Error();
         }
-
-
     })
 
     describe("POST requests to /review/new on reviewRoutes", () => {
