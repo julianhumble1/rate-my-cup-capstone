@@ -88,5 +88,13 @@ describe("getReviewsByLocation integration tests", () => {
             // Assert
             expect(response.body).to.deep.equal([])
         })
+
+        it("should respond with code 400 if not locationId provided", async () => {
+            // Arrange
+            // Act
+            const response = await request.get(`/review/location?`)
+            // Assert
+            expect(response.status).to.equal(400)
+        })
     })
 })
