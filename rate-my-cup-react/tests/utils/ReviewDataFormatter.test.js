@@ -77,5 +77,26 @@ describe("ReviewDataFormatter Tests", () => {
             expect(result).to.equal(3)
         })
 
+        it("should return the whole number above the average rating of drinks if multiple reviews and average should round down", () => {
+            // Arrange
+            const testReview1 = { drinkType: "Latte", rating: 4 }
+            const testReview2 = { drinkType: "Latte", rating: 4 }
+            const testReview3 = { drinkType: "Latte", rating: 3 }
+            // Act
+            const result = ReviewDataFormatter.calculateAverageRating([testReview1, testReview2, testReview3])
+            // Assert
+            expect(result).to.equal(4)
+        })
+    })
+
+    describe("calculateModePrice tests", () => {
+
+        it("should return 0 if empty array is passed in", () => {
+            // Arrange
+            // Act
+            const result = ReviewDataFormatter.calculateModePrice([])
+            // Assert
+            expect(result).to.equal(0)
+        })
     })
 })
