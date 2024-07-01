@@ -2,8 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import "../css/LocationDetails.css"
 import CoffeeService from "../services/CoffeeService.js"
-import InfoFormatter from "../utils/InfoFormatter.js"
 import ReviewService from "../services/ReviewService.js"
+import InfoFormatter from "../utils/InfoFormatter.js"
 import ReviewDataFormatter from "../utils/ReviewDataFormatter.js"
 
 const LocationDetails = () => {
@@ -24,23 +24,24 @@ const LocationDetails = () => {
                 setLocationInfo(formatted)
             } catch (e) {
                 setLocationInfoError(e.message)
+            } 
+        }
+
+        const fetchReviewData = async () => {
+            try {
+                
+                const responseData = await ReviewService.getAllLocationReviews(locationId)
+                setReviewData(responseData)
+            } catch (e) {
+                console.log(e)
             } finally {
                 setLoading(false)
             }
         }
 
-        const fetchReviewData = async () => {
-            try {
-                const responseData = await ReviewService.getAllLocationReviews(locationId)
-                console.log(ReviewDataFormatter.arrangeReviewsByDrink(responseData))
-                setReviewData(responseData)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-
         fetchLocationData();
-        fetchReviewData()
+        fetchReviewData();
+        
     }, [locationId])
 
 
@@ -75,8 +76,8 @@ const LocationDetails = () => {
                         <div className="row w-100 h-50">
                            <div className="col-8 h-100 p-1 pt-0">
                                <div className="boxes rounded h-100 align-content-center">
-                                    <div className = "fs-3 h-50">&#9733;&#9733;&#9733;&#9733;</div>
-                                    <div>(36 Rates)</div>
+                                   <div className="fs-3 h-50">{"★".repeat(ReviewDataFormatter.calculateAverageRating(reviewData))}</div>
+                                    <div>({reviewData.length} Rates)</div>
                                </div>
                             </div>
                             <div className="col align-content-center ">
@@ -87,7 +88,7 @@ const LocationDetails = () => {
                         </div>
                         <div className="row w-100 h-50 justify-content-center">
                            <div className="col-4 p-1 pb-0">
-                               <div className="boxes rounded align-content-center fw-bold h-100">£££</div>
+                               <div className="boxes rounded align-content-center fw-bold h-100">{"£".repeat(ReviewDataFormatter.calculateModePrice(reviewData)) }</div>
                            </div>
                            <div className="col-8 p-1 pb-0">
                                <div className="boxes rounded align-content-center h-100"> 

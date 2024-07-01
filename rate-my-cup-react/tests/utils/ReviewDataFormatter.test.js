@@ -9,7 +9,6 @@ describe("ReviewDataFormatter Tests", () => {
             const testReviewsArray = [];
             // Act
             const result = ReviewDataFormatter.arrangeReviewsByDrink(testReviewsArray)
-            console.log(result)
             // Assert
             expect(Object.keys(result).length).to.equal(8)
         })

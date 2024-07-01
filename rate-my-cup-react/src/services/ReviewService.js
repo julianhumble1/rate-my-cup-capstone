@@ -17,7 +17,6 @@ export default class ReviewService {
                 }
             })
         } catch (e) {
-            console.log(e)
             throw new Error(e.response.data)
         }
     }
