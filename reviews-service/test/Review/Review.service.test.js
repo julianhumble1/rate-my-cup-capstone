@@ -92,5 +92,14 @@ describe("Review service tests", () => {
                 expect(e.message).to.equal("Internal system error");
             } 
         })
+
+        it("should return an empty array when no reviews are found", async () => {
+            // Arrange
+            reviewsStub.returns([])
+            // Act
+            const result = await reviewService.getReviewsByLocation(locationId)
+            // Assert
+            expect(result).to.deep.equal([])
+        })
     })
 })
