@@ -5,6 +5,7 @@ import CoffeeService from "../services/CoffeeService.js"
 import ReviewService from "../services/ReviewService.js"
 import InfoFormatter from "../utils/InfoFormatter.js"
 import ReviewDataFormatter from "../utils/ReviewDataFormatter.js"
+import DrinkReviewsSummary from "./DrinkReviewsSummary.jsx"
 
 const LocationDetails = () => {
 
@@ -24,19 +25,18 @@ const LocationDetails = () => {
                 setLocationInfo(formatted)
             } catch (e) {
                 setLocationInfoError(e.message)
-            } 
+            } finally {
+                setLoading(false)
+            }
         }
 
         const fetchReviewData = async () => {
             try {
-                
                 const responseData = await ReviewService.getAllLocationReviews(locationId)
                 setReviewData(responseData)
             } catch (e) {
                 console.log(e)
-            } finally {
-                setLoading(false)
-            }
+            } 
         }
 
         fetchLocationData();
@@ -76,8 +76,10 @@ const LocationDetails = () => {
                         <div className="row w-100 h-50">
                            <div className="col-8 h-100 p-1 pt-0">
                                <div className="boxes rounded h-100 align-content-center">
-                                   <div className="fs-3 h-50">{"★".repeat(ReviewDataFormatter.calculateAverageRating(reviewData))}</div>
-                                    <div>({reviewData.length} Rates)</div>
+                                   {reviewData.length > 0 && <>
+                                        <div className="fs-3 h-50">{"★".repeat(ReviewDataFormatter.calculateAverageRating(reviewData))}</div>
+                                   </>}
+                                    <div>{reviewData.length} Rate(s)</div>
                                </div>
                             </div>
                             <div className="col align-content-center ">
@@ -88,9 +90,16 @@ const LocationDetails = () => {
                         </div>
                         <div className="row w-100 h-50 justify-content-center">
                            <div className="col-4 p-1 pb-0">
-                               <div className="boxes rounded align-content-center fw-bold h-100">{"£".repeat(ReviewDataFormatter.calculateModePrice(reviewData)) }</div>
+                               <div className="boxes rounded align-content-center fw-bold h-100">
+                                   {reviewData.length > 0 && <>
+                                    {"£".repeat(ReviewDataFormatter.calculateModePrice(reviewData))}
+                                   </>}
+                                   {reviewData.length === 0 && 
+                                    <>No price data available</>
+                                   }
+                                </div>
                            </div>
-                           <div className="col-8 p-1 pb-0">
+                           <div className="col-8 p-1 pe-0 pb-0">
                                <div className="boxes rounded align-content-center h-100"> 
                                     <div>
                                         Website: <a href={`https://${locationInfo.url}`}>{locationInfo.url}</a>
@@ -103,12 +112,24 @@ const LocationDetails = () => {
                         </div>      
                    </div>
                 </div>
-                <div className="row justify-content-center p-md-3 pt-4 m-1">
+                <div className="row justify-content-center p-md-3 p-1 pt-4 ">
                     <div className="boxes rounded p-2">
                         Address: {locationInfo.address}
                     </div>
                 </div>
-           </>}
+            <div className="row row-cols-1 row-cols-md-4 row-cols-sm-2 m-2 mb-0">
+                <DrinkReviewsSummary drinkType = {"Latte"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Espresso"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Americano"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Cappuccino"} reviewData={reviewData} />
+            </div>
+            <div className="row row-cols-1 row-cols-md-4 row-cols-sm-2 m-2 mt-0">
+                <DrinkReviewsSummary drinkType = {"Mocha"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Flat White"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Tea"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Other"} reviewData={reviewData} />
+            </div>
+        </>}
     </div>
   )
 }

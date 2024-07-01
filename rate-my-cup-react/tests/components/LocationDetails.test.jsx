@@ -4,12 +4,11 @@ import { afterEach, beforeEach, describe } from "vitest";
 import InfoFormatter from "../../src/utils/InfoFormatter.js";
 import { MemoryRouter } from "react-router-dom";
 import ReviewService from "../../src/services/ReviewService.js";
+import ReviewDataFormatter from "../../src/utils/ReviewDataFormatter.js";
 
 describe("Location Details page tests", () => {
 
     describe("Location Info rendering tests", () => {
-
-        
 
         let successfulResponse;
     
@@ -36,6 +35,7 @@ describe("Location Details page tests", () => {
                 default: class {
                     static calculateAverageRating = vi.fn();
                     static calculateModePrice = vi.fn();
+                    static arrangeReviewsByDrink = vi.fn();
                 }
             }))
     
@@ -57,6 +57,16 @@ describe("Location Details page tests", () => {
     
             const successfulReviewResponse = []
             ReviewService.getAllLocationReviews.mockReturnValue(successfulReviewResponse)
+            ReviewDataFormatter.arrangeReviewsByDrink.mockReturnValue({
+                "Latte": [],
+                "Espresso": [],
+                "Americano": [], 
+                "Cappuccino": [],
+                "Mocha": [],
+                "Flat White": [],
+                "Tea": [],
+                "Other": []
+            })
         })
     
         afterEach(() => {
@@ -151,18 +161,6 @@ describe("Location Details page tests", () => {
             expect(unavailable).not.toBeInTheDocument()
         })
     
-        // it("should display network error message if service call fails", async () => {
-        //     // Arrange
-        //     const error = new Error("service error")
-        //     CoffeeService.getLocationDetails.mockRejectedValue(error)
-        //     render(
-        //         <LocationDetails />
-        //     )
-        //     // Act
-        //     const errorMessage = screen.getByText("service error")
-        //     // Assert
-        //     expect(errorMessage).toBeInTheDocument()
-        // })
     })
     
 })
