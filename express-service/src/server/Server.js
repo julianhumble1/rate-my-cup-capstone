@@ -10,16 +10,17 @@ export default class Server {
 
     #userRouter
     #coffeeRouter
-    // #reviewRouter
+    #reviewRouter
 
     #server;
 
-    constructor(port, host, userRouter, coffeeRouter) {
+    constructor(port, host, userRouter, coffeeRouter, reviewRouter) {
         this.#app = express();
         this.#port = port;
         this.#host = host;
         this.#userRouter = userRouter;
         this.#coffeeRouter = coffeeRouter;
+        this.#reviewRouter = reviewRouter;
         this.#server = null;
     }
 
@@ -41,6 +42,10 @@ export default class Server {
         this.#app.use(
             this.#coffeeRouter.getRouteStartPoint(),
             this.#coffeeRouter.getRouter()
+        )
+        this.#app.use(
+            this.#reviewRouter.getRouteStartPoint(),
+            this.#reviewRouter.getRouter()
         )
     }
 

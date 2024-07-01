@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import supertest from "supertest"
 
-import Config from "../../src/config/config.js"
+import Config from "../../src/config/Config.js"
 import Database from "../../src/db/Database.js"
 import Server from "../../src/server/Server.js"
 import User from "../../src/models/User.model.js"
@@ -11,6 +11,8 @@ import UserService from "../../src/services/User.service.js"
 
 import CoffeeRoutes from "../../src/routes/Coffee.routes.js"
 const coffeeRoutes = new CoffeeRoutes();
+import ReviewRoutes from "../../src/routes/Review.routes.js"
+const reviewRoutes = new ReviewRoutes()
 
 import generateTestData from "../data/testUsers.js"
 const { testUsers, newUser } = await generateTestData();
@@ -29,7 +31,7 @@ describe("addNewUser integration tests", () => {
         const userRoutes = new UserRoutes(userController);
         database = new Database(DB_URI);
         await database.connect();
-        userServer = new Server(PORT, HOST, userRoutes, coffeeRoutes);
+        userServer = new Server(PORT, HOST, userRoutes, coffeeRoutes, reviewRoutes);
         userServer.start();
         request = supertest(userServer.getApp())
     })

@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import supertest from "supertest"
 
-import Config from "../../src/config/config.js"
+import Config from "../../src/config/Config.js"
 import Server from "../../src/server/Server.js"
 import CoffeeController from "../../src/controllers/Coffee.controller.js"
 import CoffeeRoutes from "../../src/routes/Coffee.routes.js"
@@ -9,6 +9,8 @@ import CoffeeService from "../../src/services/Coffee.service.js"
 
 import UserRoutes from "../../src/routes/User.routes.js"
 const userRoutes = new UserRoutes()
+import ReviewRoutes from "../../src/routes/Review.routes.js"
+const reviewRoutes = new ReviewRoutes()
 
 describe("getCoffeeByLocation integration tests", () => {
 
@@ -16,14 +18,13 @@ describe("getCoffeeByLocation integration tests", () => {
     let coffeeService;
     let request;
 
-
     before(async () => {
         Config.load();
         const { PORT, HOST, DB_URI } = process.env;
         coffeeService = new CoffeeService();
         const coffeeController = new CoffeeController(coffeeService)
         const coffeeRoutes = new CoffeeRoutes(coffeeController);
-        coffeeServer = new Server(PORT, HOST, userRoutes, coffeeRoutes)
+        coffeeServer = new Server(PORT, HOST, userRoutes, coffeeRoutes, reviewRoutes)
         coffeeServer.start();
         request = supertest(coffeeServer.getApp())
     })
