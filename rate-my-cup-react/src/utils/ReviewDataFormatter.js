@@ -14,5 +14,16 @@ export default class ReviewDataFormatter {
         return sortedReviews
     }
 
+    static calculateAverageRating = (reviewsArray) => {
+        if (reviewsArray.length === 0) {
+            return 0
+        }
+        let total = 0;
+        for (let i = 0; i < reviewsArray; i++) {
+            total += reviewsArray[i].rating
+        }
+        const average = total / (reviewsArray.length)
+        return average
+    }
 
 }
