@@ -57,12 +57,12 @@ describe("getReviewsByLocation integration tests", () => {
     })
 
     describe("GET requests to /review/location on reviewRoutes", () => {
-        it("should respond with 201 status code if successful", async () => {
+        it("should respond with 200 status code if successful", async () => {
             // Arrange
             // Act
             const response = await request.get(`/review/location?locationId=Q-WhI_pokyksoCGaVEvxaQ`)
             // Assert
-            expect(response.status).to.equal(201)
+            expect(response.status).to.equal(200)
         })
 
         it("should respond with array of single result if only one result", async () => {

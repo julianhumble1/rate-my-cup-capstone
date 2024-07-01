@@ -31,7 +31,7 @@ export default class ReviewController {
         }
         try {
             const reviews = await this.#service.getReviewsByLocation(locationId)
-            return res.status(201).json(reviews)
+            return res.status(200).json(reviews)
         } catch (e) {
             res.status(501).json("Internal system error")
         }

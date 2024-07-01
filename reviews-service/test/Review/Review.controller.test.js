@@ -147,14 +147,14 @@ describe("Review Controller tests", () => {
             expect(res.status.calledWith(501)).to.be.true
         })
 
-        it("should respond with status code 201 if service call is successful", async () => {
+        it("should respond with status code 200 if service call is successful", async () => {
             // Arrange
             const validResponse = [reviewResult1, reviewResult2]
             reviewService.getReviewsByLocation.resolves(validResponse)
             // Act
             await reviewController.getReviewsByLocation(req, res)
             // Assert
-            expect(res.status.calledWith(201)).to.be.true
+            expect(res.status.calledWith(200)).to.be.true
         })
 
         it("should respond with reviews in body if service call is successful", async () => {
