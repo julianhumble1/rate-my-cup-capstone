@@ -17,14 +17,15 @@ export default class ReviewService {
                 }
             })
         } catch (e) {
-            throw new Error(e.message)
+            console.log(e)
+            throw new Error(e.response.data)
         }
     }
 
     static getAllLocationReviews = async (locationId) => {
         try {
             const reviews = await axios.get(`${API_URL}/location?locationId=${locationId}`)
-            return reviews
+            return reviews.data
         } catch (e) {
             throw new Error(e.message)
         }

@@ -3,6 +3,8 @@ import { useParams, Link } from "react-router-dom"
 import "../css/LocationDetails.css"
 import CoffeeService from "../services/CoffeeService.js"
 import InfoFormatter from "../utils/InfoFormatter.js"
+import ReviewService from "../services/ReviewService.js"
+import ReviewDataFormatter from "../utils/ReviewDataFormatter.js"
 
 const LocationDetails = () => {
 
@@ -12,20 +14,33 @@ const LocationDetails = () => {
     const [locationInfo, setLocationInfo] = useState()
     const [locationInfoError, setLocationInfoError] = useState("")
 
+    const [reviewData, setReviewData] = useState()
+
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchLocationData = async () => {
             try {
                 const response = await CoffeeService.getLocationDetails(locationId)
                 const formatted = InfoFormatter.formatLocationResults(response)
                 setLocationInfo(formatted)
             } catch (e) {
-                console.log(e)
                 setLocationInfoError(e.message)
             } finally {
                 setLoading(false)
             }
         }
-        fetchData();
+
+        const fetchReviewData = async () => {
+            try {
+                const responseData = await ReviewService.getAllLocationReviews(locationId)
+                console.log(ReviewDataFormatter.arrangeReviewsByDrink(responseData))
+                setReviewData(responseData)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        fetchLocationData();
+        fetchReviewData()
     }, [locationId])
 
 

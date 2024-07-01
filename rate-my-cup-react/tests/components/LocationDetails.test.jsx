@@ -15,6 +15,12 @@ describe("Location Details page tests", () => {
             }
         }))
 
+        vi.mock("../../src/services/ReviewService.js", () => ({
+            default: class {
+                static getAllLocationReviews = vi.fn();
+            }
+        }))
+
         vi.mock("../../src/utils/InfoFormatter.js", () => ({
             default: class {
                 static formatLocationResults = vi.fn();

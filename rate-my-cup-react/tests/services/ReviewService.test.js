@@ -14,7 +14,10 @@ describe("Review Service tests", () => {
         it("should throw an error when axios request fails", async () => {
             // Arrange
             axios.post.mockRejectedValue({
-                message: "Axios request failed"
+                response: {
+                    data:"Axios request failed"
+                } 
+                
             })
             // Act // Assert
             try {
@@ -59,7 +62,7 @@ describe("Review Service tests", () => {
             // Act
             const reviews = await ReviewService.getAllLocationReviews("invalidLocationId");
             // Assert
-            expect(reviews.data).to.deep.equal([reviewResult])
+            expect(reviews).to.deep.equal([reviewResult])
             
         })
     })
