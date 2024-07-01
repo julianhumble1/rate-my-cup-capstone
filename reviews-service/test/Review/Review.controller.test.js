@@ -99,6 +99,9 @@ describe("Review Controller tests", () => {
     })
     describe("getReviewsByLocation controller tests", () => {
 
+        let reviewResult1
+        let reviewResult2
+
         beforeEach(() => {
             reviewService = {
                 getReviewsByLocation: sinon.stub()
@@ -109,6 +112,12 @@ describe("Review Controller tests", () => {
                 query: {
                     locationId: "testLocationId"
                 }
+            }
+            reviewResult1 = {
+                message: "Test1"
+            }
+            reviewResult2 = {
+                message: "Test2"
             }
         })
 
@@ -136,6 +145,16 @@ describe("Review Controller tests", () => {
             await reviewController.getReviewsByLocation(req, res)
             // Assert
             expect(res.status.calledWith(501)).to.be.true
+        })
+
+        it("should respond with status code 201 if service call is successful", async () => {
+            // Arrange
+            const validResponse = [reviewResult1, reviewResult2]
+            reviewService.getReviewsByLocation.resolves(validResponse)
+            // Act
+            await reviewController.getReviewsByLocation(req, res)
+            // Assert
+            expect(res.status.calledWith(201)).to.be.true
         })
     })
 })
