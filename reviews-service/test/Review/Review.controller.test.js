@@ -7,7 +7,7 @@ import ReviewValidator from "../../src/middleware/ReviewValidator.js";
 describe("Review Controller tests", () => {
 
     let reviewController;
-    let reviewServices;
+    let reviewService;
 
     let req, res, next;
     let reviewValidatorStub;
@@ -26,10 +26,10 @@ describe("Review Controller tests", () => {
         let newReview;
 
         beforeEach(() => {
-            reviewServices = {
+            reviewService = {
                 addNewReview: sinon.stub()
             }
-            reviewController = new ReviewController(reviewServices)
+            reviewController = new ReviewController(reviewService)
 
             req = {
                 userId: "123",
@@ -63,7 +63,7 @@ describe("Review Controller tests", () => {
 
         it("should respond with new review in body if request is successful", async () => {
             // Arrange
-            reviewServices.addNewReview.resolves(newReview);
+            reviewService.addNewReview.resolves(newReview);
             // Act
             await reviewController.addNewReview(req, res)
             // Assert
@@ -72,7 +72,7 @@ describe("Review Controller tests", () => {
 
         it("should respond with 201 status code if request is successful", async () => {
             // Arrange
-            reviewServices.addNewReview.resolves(newReview);
+            reviewService.addNewReview.resolves(newReview);
             // Act
             await reviewController.addNewReview(req, res)
             // Assert
@@ -81,7 +81,7 @@ describe("Review Controller tests", () => {
 
         it("should respond with 400 status code if unable to create new review document", async () => {
             // Arrange
-            reviewServices.addNewReview.rejects(new Error("Failed to create Review document"));
+            reviewService.addNewReview.rejects(new Error("Failed to create Review document"));
             // Act
             await reviewController.addNewReview(req, res)
             // Assert
@@ -90,11 +90,42 @@ describe("Review Controller tests", () => {
 
         it("should respond with 500 status code if internal system error", async () => {
             // Arrange
-            reviewServices.addNewReview.rejects(new Error("Failed to save to database"));
+            reviewService.addNewReview.rejects(new Error("Failed to save to database"));
             // Act
             await reviewController.addNewReview(req, res)
             // Assert
             expect(res.status.calledWith(500)).to.be.true;
+        })
+    })
+    describe("getReviewsByLocation controller tests", () => {
+
+        beforeEach(() => {
+            reviewService = {
+                getReviewsByLocation: sinon.stub()
+            }
+            reviewController = new ReviewController(reviewService)
+
+            req = {
+                query: {
+                    locationId: "testLocationId"
+                }
+            }
+        })
+
+        afterEach(() => {
+            sinon.restore();
+        })
+
+        it("should respond with status code 400 if no locationId is provided", async () => {
+            // Arrange
+            req = {
+                query: {}
+            }
+            // Act
+            await reviewController.getReviewsByLocation(req,res);
+            // Assert
+            expect(res.status.calledWith(400)).to.be.true
+
         })
     })
 })
