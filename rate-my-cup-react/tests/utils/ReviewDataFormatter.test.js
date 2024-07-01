@@ -98,5 +98,14 @@ describe("ReviewDataFormatter Tests", () => {
             // Assert
             expect(result).to.equal(0)
         })
+
+        it("should return the price of the drink if only one review", () => {
+            // Arrange
+            const testReview1 = { drinkType: "Latte", rating: 3, price: 1 }
+            // Act
+            const result = ReviewDataFormatter.calculateModePrice([testReview1])
+            // Assert
+            expect(result).to.equal(1)
+        })
     })
 })

@@ -30,13 +30,13 @@ export default class ReviewDataFormatter {
         if (reviewsArray.length === 0) {
             return 0
         }
-        const priceCounts = {1: 0, 2: 0, 3: 0}
+        const priceCounts = {"1": 0, "2": 0, "3": 0}
         reviewsArray.forEach(review => {
             priceCounts[review.price]++
         })
         const highestCount = Math.max(...Object.values(priceCounts))
         const modePrice = Object.keys(priceCounts).find(price => priceCounts[price] === highestCount);
-        return modePrice
+        return Number(modePrice)
         
     }
 
