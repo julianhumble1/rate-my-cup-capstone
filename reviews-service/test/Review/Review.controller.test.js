@@ -127,5 +127,15 @@ describe("Review Controller tests", () => {
             expect(res.status.calledWith(400)).to.be.true
 
         })
+
+        it("should respond with status code 501 if service throws error", async () => {
+            // Arrange
+            const error = new Error("Service threw error")
+            reviewService.getReviewsByLocation.rejects(error)
+            // Act
+            await reviewController.getReviewsByLocation(req, res)
+            // Assert
+            expect(res.status.calledWith(501)).to.be.true
+        })
     })
 })
