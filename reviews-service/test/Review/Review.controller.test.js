@@ -156,5 +156,15 @@ describe("Review Controller tests", () => {
             // Assert
             expect(res.status.calledWith(201)).to.be.true
         })
+
+        it("should respond with reviews in body if service call is successful", async () => {
+            // Arrange
+            const validResponse = [reviewResult1, reviewResult2]
+            reviewService.getReviewsByLocation.resolves(validResponse)
+            // Act
+            await reviewController.getReviewsByLocation(req, res)
+            // Assert
+            expect(res.json.calledWith(validResponse)).to.be.true
+        })
     })
 })
