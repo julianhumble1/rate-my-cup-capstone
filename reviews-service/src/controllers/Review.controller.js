@@ -24,4 +24,17 @@ export default class ReviewController {
         }
     }
 
+    getReviewsByLocation = async (req, res) => {
+        const locationId = req.query.locationId;
+        if (!locationId) {
+            return res.status(400).json("No location ID provided")
+        }
+        try {
+            const reviews = await this.#service.getReviewsByLocation(locationId)
+            return res.status(201).json(reviews)
+        } catch (e) {
+            res.status(501).json("Internal system error")
+        }
+    }
+
 }

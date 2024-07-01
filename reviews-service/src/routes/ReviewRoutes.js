@@ -29,6 +29,11 @@ export default class ReviewRoutes {
             [AuthJWT.verifyToken, ...ReviewValidator.validateNewReview()],
             this.#controller.addNewReview
         )
+
+        this.#router.get(
+            "/location?",
+            this.#controller.getReviewsByLocation
+        )
      }
 
     getRouter = () => {

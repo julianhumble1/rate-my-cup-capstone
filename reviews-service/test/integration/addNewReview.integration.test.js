@@ -17,7 +17,7 @@ describe("addNewReview integration tests", () => {
     let reviewService;
     let database;
     let request;
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODA3NzlkZGU4ODNiYjFmMjc5NWRkNyIsImlhdCI6MTcxOTczNDkxMCwiZXhwIjoxNzE5ODIxMzEwfQ.XXcLqKGed1SXsoKTp3H_rowQmQdSAxeOrsdGFU9mzuU"
+    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODA3NzlkZGU4ODNiYjFmMjc5NWRkNyIsImlhdCI6MTcxOTgyMjMzNCwiZXhwIjoxNzE5OTA4NzM0fQ.QvCjJpNCmQ9AW1BYQj57E-2w-BJUT73pUtDcEmnmq04"
 
     before(async () => {
         Config.load();
@@ -141,8 +141,5 @@ describe("addNewReview integration tests", () => {
             // Assert
             expect(response.status).to.equal(400);
         })
-
-
     })
-
 })

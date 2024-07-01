@@ -65,7 +65,32 @@ describe("Review service tests", () => {
                 expect(e.message).to.equal("Failed to save to database");
             } 
         })
+    })
+    
+    describe("getReviewsByLocation service tests", () => {
 
+        let reviewsStub;
+        let locationId
+        beforeEach(() => {
+            reviewsStub = sinon.stub(Review, "find")
+            locationId = "testLocationId"
+        })
 
+        afterEach(() => {
+            sinon.restore();
+        })
+
+        it("should throw internal system error when database call fails", async () => {
+            // Arrange
+            const error = new Error("failed database call")
+            reviewsStub.throws(error)
+            // Act // Assert
+            try {
+                await reviewService.getReviewsByLocation(locationId)
+                expect.fail("Expected error was not thrown")
+            } catch (e) {
+                expect(e.message).to.equal("Internal system error");
+            } 
+        })
     })
 })

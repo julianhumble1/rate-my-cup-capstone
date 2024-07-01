@@ -22,4 +22,14 @@ export default class ReviewService {
             throw new Error("Failed to save to database")
         }
     }
+
+    getReviewsByLocation = async (locationId) => {
+        let reviews
+        try {
+            reviews = await Review.find({ locationId: locationId })
+            return reviews;
+        } catch (e) {
+            throw new Error("Internal system error")
+        }
+    }
 }
