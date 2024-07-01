@@ -11,6 +11,7 @@ export default class AuthJWT {
 
         jwt.verify(token, process.env.SECRET, (err, decoded) => {
             if (err) {
+                console.log("failed to decode token")
                 return res.status(401).send("Unauthorized")
             }
             
