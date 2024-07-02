@@ -26,3 +26,14 @@ Content-Type: application/json
     "password": "password1!",
     "role": "admin"
 }
+
+
+### 
+
+POST https://rate-my-cup-capstone.onrender.com/user/register
+Content-Type: application/json
+
+{
+    "email": "email2@email.com",
+    "password": "password2!"
+}

@@ -31,9 +31,11 @@ export default class UserService {
     }
 
     loginUser = async ({ email, password }) => {
+        console.log("request reached service")
         let user;
         try {
-            user = await User.findOne({email: email})
+            user = await User.findOne({ email: email })
+            console.log("request spoke to database")
         } catch (e) {
             throw new Error("Internal system error")
         }

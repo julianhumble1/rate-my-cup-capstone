@@ -5,3 +5,13 @@ Content-Type: application/json
     "email": "email1@email.com",
     "password": "password1!"
 }
+
+###
+
+POST https://rate-my-cup-capstone-backend.onrender.com/user/login 
+Content-Type: application/json
+
+{
+    "email": "email@email.com",
+    "password": "password1!"
+}
