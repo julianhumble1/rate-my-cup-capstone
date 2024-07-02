@@ -221,7 +221,7 @@ describe("Review Controller tests", () => {
             expect(res.status.calledWith(200)).to.be.true;
         })
 
-        it("should respond with 404 status code if request is successful", async () => {
+        it("should respond with 404 status code if review is not found", async () => {
             // Arrange
             const error = new Error("Review not found")
             reviewService.editReview.rejects(error)
@@ -229,6 +229,16 @@ describe("Review Controller tests", () => {
             await reviewController.editReview(req, res)
             // Assert
             expect(res.status.calledWith(404)).to.be.true;
+        })
+
+        it("should respond with 500 status code if database connection throws errors", async () => {
+            // Arrange
+            const error = new Error("Internal system error")
+            reviewService.editReview.rejects(error)
+            // Act
+            await reviewController.editReview(req, res)
+            // Assert
+            expect(res.status.calledWith(500)).to.be.true;
         })
 
     })
