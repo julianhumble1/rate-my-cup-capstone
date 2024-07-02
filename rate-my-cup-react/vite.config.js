@@ -11,9 +11,9 @@ export default defineConfig({
         globals: true,
   },
   base: '/',
-  server: {
-    port: 3000,
-    open: true,
-    historyApiFallback: true, // This handles client-side routing
-  },
+  // server: {
+  //   port: 3000,
+  //   open: true,
+  //   historyApiFallback: true, // This handles client-side routing
+  // },
 })

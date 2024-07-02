@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const API_URL = import.meta.env.VITE_APP_COFFEE_URL
-const TOMTOM_API_KEY = import.meta.env.TOMTOM_API_KEY
+const TOMTOM_API_KEY = import.meta.env.VITE_TOMTOM_API_KEY
 
 export default class CoffeeService {
     static locationSearch = async (postcode) => {
