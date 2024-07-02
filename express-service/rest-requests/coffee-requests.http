@@ -1,0 +1,3 @@
+GET http://localhost:3000/coffee/location?postcode=TW182df 
+Content-Type: application/json
+
