@@ -22,6 +22,7 @@ export default class CoffeeController {
     }
 
     getCoffeeByLocation = async (req, res) => {
+        console.log("reached coffee controller")
         const sentResponse = CoffeeValidator.handleValidationErrors(req, res)
         if (sentResponse) return;
         try {
