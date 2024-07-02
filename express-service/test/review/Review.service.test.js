@@ -117,4 +117,33 @@ describe("Review service tests", () => {
             expect(result).to.deep.equal([reviewResult1, reviewResult2])
         })
     })
+
+    describe("editReview service tests", () => {
+        let reviewsStub;
+        let reqBody
+        beforeEach(() => {
+            reviewsStub = sinon.stub(Review, "findOneAndUpdate")
+            reqBody = {
+                "drinkType": "Espresso", 
+                "rating": 3,
+                "price": 2,
+                "comment": "",
+                "reviewId": "66846b6271416785046e06b2",
+            }
+        })
+
+        afterEach(() => {
+            sinon.restore();
+        })
+
+        it("should return updatedReview if request is successful", async () => {
+            // Arrange
+            const updatedReview = {review: "updatedReview"}
+            reviewsStub.resolves(updatedReview)
+            // Act
+            const result = await reviewService.editReview(reqBody)
+            // Assert
+            expect(result).to.equal(updatedReview)
+        })
+    })
 })

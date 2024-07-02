@@ -35,7 +35,7 @@ export default class ReviewService {
 
     editReview = async ({drinkType, rating, price, comment, reviewId}) => {
         try {
-            const updatedReview = Review.findOneAndUpdate(
+            const updatedReview = await Review.findOneAndUpdate(
                 { _id: reviewId },
                 {$set: {
                     drinkType: drinkType,
