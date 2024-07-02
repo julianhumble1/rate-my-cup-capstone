@@ -19,4 +19,20 @@ export default class AuthJWT {
             next();
         })
     }
+
+    static verifyAuth = (req, res, next) => {
+        const tokenId = req.userId;
+        const reviewUserId = req.reviewUserId;
+        if (tokenId.equals(reviewUserId)) {
+        } else {
+            next();
+            const role = User.find({ id: tokenId }).role
+            if (role.equals("admin")) {
+                next();
+            } else {
+                return res.status(403).json("Unauthorized")
+            }
+        }
+
+    }
 }

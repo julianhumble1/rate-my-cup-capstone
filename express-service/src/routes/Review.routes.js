@@ -34,6 +34,11 @@ export default class ReviewRoutes {
             "/location?",
             this.#controller.getReviewsByLocation
         )
+
+        this.#router.put(
+            "/",
+            [AuthJWT.verifyToken]
+        )
      }
 
     getRouter = () => {
