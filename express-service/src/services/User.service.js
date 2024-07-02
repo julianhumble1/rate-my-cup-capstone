@@ -5,9 +5,11 @@ import jwt from "jsonwebtoken"
 export default class UserService {
 
     addNewUser = async (newUser) => {
+        console.log("request reached service")
         let user;
         try {
             await this.#checkEmailTaken(newUser.email)
+            console.log("request spoke to database")
             if (!newUser.role) {
                 user = new User({
                     email: newUser.email,
@@ -31,11 +33,9 @@ export default class UserService {
     }
 
     loginUser = async ({ email, password }) => {
-        console.log("request reached service")
         let user;
         try {
             user = await User.findOne({ email: email })
-            console.log("request spoke to database")
         } catch (e) {
             throw new Error("Internal system error")
         }
