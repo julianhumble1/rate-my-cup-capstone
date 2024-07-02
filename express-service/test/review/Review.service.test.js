@@ -158,5 +158,17 @@ describe("Review service tests", () => {
                 expect(e.message).to.equal("Internal system error");
             } 
         })
+
+         it("should throw review not found error when no review matches", async () => {
+            // Arrange
+            reviewsStub.resolves(null)
+            // Act // Assert
+            try {
+                await reviewService.editReview(reqBody)
+                expect.fail("Expected error was not thrown")
+            } catch (e) {
+                expect(e.message).to.equal("Review not found");
+            } 
+        })
     })
 })
