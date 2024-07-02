@@ -46,7 +46,7 @@ function App() {
         />
         <Route
           path="/location/:id"
-          element={<LocationDetails />}
+          element={<LocationDetails loggedIn={loggedIn} />}
         />
         <Route
           path="/rate/new"

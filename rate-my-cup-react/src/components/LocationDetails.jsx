@@ -7,7 +7,7 @@ import InfoFormatter from "../utils/InfoFormatter.js"
 import ReviewDataFormatter from "../utils/ReviewDataFormatter.js"
 import DrinkReviewsSummary from "./DrinkReviewsSummary.jsx"
 
-const LocationDetails = () => {
+const LocationDetails = ({loggedIn}) => {
 
     const locationId = useParams().id;
     const [loading, setLoading] = useState(true)
@@ -16,32 +16,6 @@ const LocationDetails = () => {
     const [locationInfoError, setLocationInfoError] = useState("")
 
     const [reviewData, setReviewData] = useState()
-
-    // useEffect(() => {
-    //     const fetchLocationData = async () => {
-    //         try {
-    //             const response = await CoffeeService.getLocationDetails(locationId)
-    //             const formatted = InfoFormatter.formatLocationResults(response)
-    //             setLocationInfo(formatted)
-    //         } catch (e) {
-    //             setLocationInfoError(e.message)
-    //         } 
-    //     }
-
-    //     const fetchReviewData = async () => {
-    //         try {
-    //             const responseData = await ReviewService.getAllLocationReviews(locationId)
-    //             setReviewData(responseData)
-    //         } catch (e) {
-    //             console.log(e)
-    //         } 
-    //     }
-
-    //     fetchLocationData();
-    //     fetchReviewData();
-    //     setLoading(false)
-        
-    // }, [locationId])
     
     useEffect(() => {
         const fetchLocationData = async () => {
@@ -116,9 +90,9 @@ const LocationDetails = () => {
                                </div>
                             </div>
                             <div className="col align-content-center ">
-                                <Link to={`/rate/new/${locationId}`} className="btn btn-outline-dark col-12" id="rate-a-cup-here">
+                                <Link to={`/rate/new/${locationId}`} className={`btn btn-outline-dark col-12 ${!loggedIn && "disabled"}`} id="rate-a-cup-here">
                                     Rate a cup at this location
-                                </Link>
+                               </Link>
                             </div>
                         </div>
                         <div className="row w-100 h-50 justify-content-center">

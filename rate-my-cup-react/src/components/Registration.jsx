@@ -62,7 +62,7 @@ const Registration = () => {
 
   return (
     <div>
-      <div className="container text-center rounded-5" id="registration-box">
+      <div className="container text-center rounded" id="registration-box">
         <h2>Registration</h2>
       {(successfulRegistration !== "successful") &&
         <form noValidate className="container p-3" onSubmit={handleRegistration} data-testid = "registration-form">
@@ -90,7 +90,7 @@ const Registration = () => {
           <div className="text-success">
             Registration Successful!
           </div>
-          <Link to="/login-screen">
+          <Link to="/login">
             Click here to login
           </Link>
           </>

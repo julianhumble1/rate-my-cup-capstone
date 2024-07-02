@@ -26,10 +26,13 @@ const Header = ({loggedIn, setLoggedIn}) => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarToggler">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
-                            <Link to="/home" className="nav-link" id = "home-link" aria-current="page" href="#">Home</Link>
+                            <Link to="/home" className="header-link p-2" id="home-link" aria-current="page" href="#">Home</Link>
                         </ul>
+                        {!loggedIn && <div className="p-2"><Link to="/login" className=" header-link" id="login-link" aria-current="page" href="#">Login</Link> </div>}
+                        {!loggedIn && <div className="p-2"><Link to="/register" className="header-link">Register</Link></div>}
+                            
                         {loggedIn &&
-                        <button type="button" className="btn" id ="logout" onClick={logout}>Logout</button>}
+                        <button type="button" className="btn header-link" id ="logout" onClick={logout}>Logout</button>}
                     </div>
                 </div>
             </nav>
