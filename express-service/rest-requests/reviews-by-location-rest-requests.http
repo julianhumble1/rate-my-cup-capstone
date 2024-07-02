@@ -2,4 +2,4 @@ GET http://localhost:3000/review/location?locationId=Q-WhI_pokyksoCGaVEvxaQ
 
 ###
 
-GET https://rate-my-cup-capstone.onrender.com/review/location?locationId=Q-WhI_pokyksoCGaVEvxaQ
+GET https://rate-my-cup-capstone-backend.onrender.com/review/location?locationId=Q-WhI_pokyksoCGaVEvxaQ

@@ -30,7 +30,7 @@ Content-Type: application/json
 
 ### 
 
-POST https://rate-my-cup-capstone.onrender.com/user/register
+POST https://rate-my-cup-capstone-backend.onrender.com/user/register
 Content-Type: application/json
 
 {

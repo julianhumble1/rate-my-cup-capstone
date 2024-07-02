@@ -12,7 +12,7 @@ x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODA3NzlkZGU4ODN
 
 ### 
 
-POST https://rate-my-cup-capstone.onrender.com/review/new
+POST https://rate-my-cup-capstone-backend.onrender.com/review/new
 Content-Type: application/json 
 x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODA3NzlkZGU4ODNiYjFmMjc5NWRkNyIsImlhdCI6MTcxOTY5NTI3MSwiZXhwIjoxNzE5NzgxNjcxfQ.X0jph6Mk4-0pCV3hithCk_GeQyzlzEV_gP4oqggE_AU
 
