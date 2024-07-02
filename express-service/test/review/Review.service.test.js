@@ -145,5 +145,18 @@ describe("Review service tests", () => {
             // Assert
             expect(result).to.equal(updatedReview)
         })
+
+        it("should throw internal system error when database call fails", async () => {
+            // Arrange
+            const error = new Error("failed database call")
+            reviewsStub.throws(error)
+            // Act // Assert
+            try {
+                await reviewService.editReview(reqBody)
+                expect.fail("Expected error was not thrown")
+            } catch (e) {
+                expect(e.message).to.equal("Internal system error");
+            } 
+        })
     })
 })
