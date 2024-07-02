@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+import User from "../models/User.model.js"
 
 export default class AuthJWT {
 
@@ -20,14 +21,14 @@ export default class AuthJWT {
         })
     }
 
-    static verifyAuth = (req, res, next) => {
+    static verifyAuth = async (req, res, next) => {
         const tokenId = req.userId;
-        const reviewUserId = req.reviewUserId;
+        const reviewUserId = req.body.reviewUserId;
         if (tokenId === reviewUserId) {
             next();
         } else {
-            const role = User.find({ id: tokenId }).role
-            if (role === "admin") {
+            const tokenUser = await User.findOne({ _id: tokenId })
+            if (tokenUser.role === "admin") {
                 next();
             } else {
                 return res.status(403).json("Unauthorized")

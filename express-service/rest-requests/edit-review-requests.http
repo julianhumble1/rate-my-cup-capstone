@@ -1,0 +1,27 @@
+PUT http://localhost:3000/review/
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNiMjZjMDllOGQyODc4OTFjZWQ5NyIsImlhdCI6MTcxOTk1NDEyMywiZXhwIjoxNzIwMDQwNTIzfQ.E0vKNjCaxkT0cSIU8UPIu2ETOB--xZsGzjr7Lm9Kx9I
+
+{
+    "drinkType": "Espresso", 
+    "rating": 3,
+    "price": 2,
+    "comment": "",
+    "reviewId": "66846b6271416785046e06b2",
+    "reviewUserId": "6683b26c09e8d287891ced97"
+}
+
+###
+
+PUT http://localhost:3000/review/
+Content-Type: application/json
+x-access-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODQ2YzljNjJlNzk4NDE4MGNlNTM5MyIsImlhdCI6MTcxOTk1NDg3OSwiZXhwIjoxNzIwMDQxMjc5fQ.MkNXNucz-loAClh-kh5hFFD71xXClIfSprTpyHV9Ivs
+
+{
+    "drinkType": "Espresso", 
+    "rating": 3,
+    "price": 2,
+    "comment": "",
+    "reviewId": "66846b6271416785046e06b2",
+    "reviewUserId": "6683b26c09e8d287891ced97"
+}

@@ -167,4 +167,51 @@ describe("Review Controller tests", () => {
             expect(res.json.calledWith(validResponse)).to.be.true
         })
     })
+
+    describe("editReview controller tests", () => {
+
+        let updatedReview;
+
+        beforeEach(() => {
+            reviewService = {
+                editReview: sinon.stub()
+            }
+            reviewController = new ReviewController(reviewService)
+
+            req = {
+                body: {
+                    drinkType: "Latte",
+                    rating: 3,
+                    price: 2,
+                    comment: "",
+                    reviewId: "testReviewId", 
+                    userReviewId: "testUserReviewId"
+                }
+            }
+
+            updatedReview = {
+                drinkType: "Latte",
+                rating: 3,
+                price: 2,
+                comment: "",
+                reviewId: "testReviewId", 
+                userReviewId: "testUserReviewId"
+            }
+        })
+
+        afterEach(() => {
+            sinon.restore();
+        })
+
+        it("should respond with updated review in response if request is successful", async () => {
+            // Arrange
+            reviewService.editReview.resolves(updatedReview)
+            // Act
+            await reviewController.editReview(req, res)
+            // Assert
+            expect(res.json.calledWith(updatedReview)).to.be.true;
+        })
+
+    })
+
 })
