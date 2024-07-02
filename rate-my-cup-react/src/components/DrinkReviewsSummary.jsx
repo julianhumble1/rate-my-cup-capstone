@@ -1,7 +1,8 @@
 import "../css/DrinkReviewsSummary.css"
 import ReviewDataFormatter from "../utils/ReviewDataFormatter.js"
+import { Link } from "react-router-dom"
 
-const DrinkReviewsSummary = ({ drinkType, reviewData }) => {
+const DrinkReviewsSummary = ({ drinkType, reviewData, locationId }) => {
 
     const sortedReviewData = ReviewDataFormatter.arrangeReviewsByDrink(reviewData)
     const reviewsArray = sortedReviewData[drinkType]
@@ -16,7 +17,7 @@ const DrinkReviewsSummary = ({ drinkType, reviewData }) => {
                 <div className="row justify-content-center">
                     <div className="fs-3">{"★".repeat(ReviewDataFormatter.calculateAverageRating(reviewsArray))}</div>
                         <div className="fw-bold justify-content-center">{"£".repeat(ReviewDataFormatter.calculateModePrice(reviewsArray))}</div>    
-                    <div className="justify-content-center">{reviewsArray.length} rate(s)</div>
+                    <Link className="justify-content-center" to={`/reviews/${locationId}/${drinkType}`}>{reviewsArray.length} rate(s)</Link>
                 </div>
                 }
                 {reviewsArray.length === 0 && <>

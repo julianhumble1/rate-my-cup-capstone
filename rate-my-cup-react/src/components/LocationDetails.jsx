@@ -86,7 +86,7 @@ const LocationDetails = ({loggedIn}) => {
                                    {reviewData.length > 0 && <>
                                         <div className="fs-3 h-50">{"★".repeat(ReviewDataFormatter.calculateAverageRating(reviewData))}</div>
                                    </>}
-                                    <div>{reviewData.length} Rate(s)</div>
+                                    <Link to={`/reviews/${locationId}`}>{reviewData.length} Rate(s)</Link>
                                </div>
                             </div>
                             <div className="col align-content-center ">
@@ -125,16 +125,16 @@ const LocationDetails = ({loggedIn}) => {
                     </div>
                 </div>
             <div className="row row-cols-1 row-cols-md-4 row-cols-sm-2 m-2 mb-0">
-                <DrinkReviewsSummary drinkType = {"Latte"} reviewData={reviewData} />
-                <DrinkReviewsSummary drinkType = {"Espresso"} reviewData={reviewData} />
-                <DrinkReviewsSummary drinkType = {"Americano"} reviewData={reviewData} />
-                <DrinkReviewsSummary drinkType = {"Cappuccino"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Latte"} reviewData={reviewData} locationId={locationId} />
+                <DrinkReviewsSummary drinkType = {"Espresso"} reviewData={reviewData} locationId={locationId}/>
+                <DrinkReviewsSummary drinkType = {"Americano"} reviewData={reviewData} locationId={locationId}/>
+                <DrinkReviewsSummary drinkType = {"Cappuccino"} reviewData={reviewData} locationId={locationId}/>
             </div>
             <div className="row row-cols-1 row-cols-md-4 row-cols-sm-2 m-2 mt-0">
-                <DrinkReviewsSummary drinkType = {"Mocha"} reviewData={reviewData} />
-                <DrinkReviewsSummary drinkType = {"Flat White"} reviewData={reviewData} />
-                <DrinkReviewsSummary drinkType = {"Tea"} reviewData={reviewData} />
-                <DrinkReviewsSummary drinkType = {"Other"} reviewData={reviewData} />
+                <DrinkReviewsSummary drinkType = {"Mocha"} reviewData={reviewData} locationId={locationId}/>
+                <DrinkReviewsSummary drinkType = {"Flat White"} reviewData={reviewData} locationId={locationId}/>
+                <DrinkReviewsSummary drinkType = {"Tea"} reviewData={reviewData} locationId={locationId}/>
+                <DrinkReviewsSummary drinkType = {"Other"} reviewData={reviewData} locationId={locationId}/>
             </div>
         </>}
     </div>

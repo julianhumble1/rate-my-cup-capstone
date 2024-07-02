@@ -31,7 +31,7 @@ const Home = () => {
           <input type="text" id="postcode-box" className="form-control" placeholder="Postcode" onChange={(e) => setPostcodeSearch(e.target.value)}/>
         </div>
       </div>
-      <div className="row">
+      <div className="row pt-3 pt-md-0">
         <div className="d-none d-md-block col-md-4 ">
           <label htmlFor="coffee-choice">Drink Type</label>
         </div>
@@ -72,7 +72,7 @@ const Home = () => {
           </div>
         </div>
         <div className="row justify-content-center">
-          <div className="col-12 col-md-6 mt-5">
+          <div className="col-12 col-md-6 ">
             <button type="button" className="btn btn-outline-dark col-10 col-md-12" id="search-button" data-testid="location-search-button" onClick={handleSearch}>Find My Cup!</button>
             {postcodeError && <div className="text-danger">
               {postcodeError}

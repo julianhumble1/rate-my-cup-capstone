@@ -8,6 +8,7 @@ import { useEffect, useState } from "react"
 
 import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from "react-router-dom"
 import NewRate from "./components/NewRate.jsx"
+import ListOfReviews from "./components/ListOfReviews.jsx"
 
 function App() {
 
@@ -55,6 +56,14 @@ function App() {
         <Route
           path="/rate/new/:locationId"
           element={<NewRate />}
+        />
+        <Route
+          path="/reviews/:locationId"
+          element={<ListOfReviews/>}
+        />
+        <Route
+          path="/reviews/:locationId/:drinkType"
+          element={<ListOfReviews/>}
         />
       </Routes>
     </Router>
