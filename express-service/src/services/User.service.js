@@ -5,11 +5,9 @@ import jwt from "jsonwebtoken"
 export default class UserService {
 
     addNewUser = async (newUser) => {
-        console.log("request reached service")
         let user;
         try {
             await this.#checkEmailTaken(newUser.email)
-            console.log("request spoke to database")
             if (!newUser.role) {
                 user = new User({
                     email: newUser.email,

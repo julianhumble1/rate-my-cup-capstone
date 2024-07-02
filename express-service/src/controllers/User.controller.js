@@ -10,7 +10,6 @@ export default class UserController {
     }
 
     addNewUser = async (req, res) => {
-        console.log("request reached controller")
         const sentResponse = UserValidator.handleValidationErrors(req, res)
         if (sentResponse) return;
         try {
