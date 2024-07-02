@@ -212,6 +212,15 @@ describe("Review Controller tests", () => {
             expect(res.json.calledWith(updatedReview)).to.be.true;
         })
 
+        it("should respond with 200 status code if request is successful", async () => {
+            // Arrange
+            reviewService.editReview.resolves(updatedReview)
+            // Act
+            await reviewController.editReview(req, res)
+            // Assert
+            expect(res.status.calledWith(200)).to.be.true;
+        })
+
     })
 
 })
