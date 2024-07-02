@@ -4,7 +4,9 @@ import "../css/Review.css"
 import CoffeeService from "../services/CoffeeService.js"
 import InfoFormatter from "../utils/InfoFormatter.js"
 
-const Review = ({review}) => {
+const Review = ({ review }) => {
+    
+    const role = localStorage.getItem("role")
 
     const [locationDetails, setLocationDetails] = useState("")
 
@@ -28,7 +30,9 @@ const Review = ({review}) => {
                 <div>Location: <Link to={`/location/${review.locationId}`}>{locationDetails.name}</Link></div>
                 <div className='fw-light'>{review.drinkType}</div>
                 <div>Rating: {"★".repeat(review.rating)}</div>
-                <div className='fw-light'>Price: {"£".repeat(review.price) }</div>
+                <div className='fw-light'>Price: {"£".repeat(review.price)}</div>
+                {review.comment && <div >{review.comment}</div>}
+                {(role==="admin" || review.userId === localStorage.getItem("id")) && <Link id="edit-button">Edit</Link>}
             </div>
         </div>
     )

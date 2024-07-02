@@ -8,16 +8,6 @@ import { afterEach, beforeEach } from "vitest";
 describe("List Of Reviews page tests", () => {
 
     beforeEach(() => {  
-        vi.mock("react-route-dom", async () => {
-            const mod = await vi.importActual("react-router-dom")
-            return {
-                ...mod,
-                useParams: () => ({
-                    locationId: 123,
-                    drinkType: null
-                })
-            }
-        })
 
         vi.mock("../../src/services/ReviewService.js", () => ({
             default: class {
@@ -33,21 +23,53 @@ describe("List Of Reviews page tests", () => {
     })
 
     afterEach(() => {
-        vi.restoreAllMocks()
+        vi.resetAllMocks()
     })
 
     it("should display All reviews if drinkType is null", async () => {
         // Arrange
+       vi.mock("react-router-dom", async () => {
+            const mod = await vi.importActual("react-router-dom");
+            return {
+                ...mod,
+                useParams: vi.fn(() => ({
+                    locationId: 123,
+                    drinkType: null
+                })),
+            };
+        });
+        // Act
         await act(async () => {
             render(<MemoryRouter>
                 <ListOfReviews />
             </MemoryRouter>)
         })
-        // Act
         const allReviews = screen.getByText("All Reviews")
         // Assert
         expect(allReviews).toBeInTheDocument();
-
     })
+
+    // it("should display Latte reviews if drinkType is Latte", async () => {
+    //     // Arrange
+    //     vi.mock("react-router-dom", async () => {
+    //         const mod = await vi.importActual("react-router-dom");
+    //         return {
+    //             ...mod,
+    //             useParams: vi.fn(() => ({
+    //                 locationId: 123,
+    //                 drinkType: "Latte"
+    //             })),
+    //         };
+    //     });
+    //     // Act
+    //     await act(async () => {
+    //         render(<MemoryRouter>
+    //             <ListOfReviews />
+    //         </MemoryRouter>)
+    //     })
+    //     const latteReviews = screen.getByText("Latte Reviews")
+    //     // Assert
+    //     expect(latteReviews).toBeInTheDocument();
+    // })
 
 })
