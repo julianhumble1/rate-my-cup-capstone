@@ -17,32 +17,65 @@ const LocationDetails = () => {
 
     const [reviewData, setReviewData] = useState()
 
+    // useEffect(() => {
+    //     const fetchLocationData = async () => {
+    //         try {
+    //             const response = await CoffeeService.getLocationDetails(locationId)
+    //             const formatted = InfoFormatter.formatLocationResults(response)
+    //             setLocationInfo(formatted)
+    //         } catch (e) {
+    //             setLocationInfoError(e.message)
+    //         } 
+    //     }
+
+    //     const fetchReviewData = async () => {
+    //         try {
+    //             const responseData = await ReviewService.getAllLocationReviews(locationId)
+    //             setReviewData(responseData)
+    //         } catch (e) {
+    //             console.log(e)
+    //         } 
+    //     }
+
+    //     fetchLocationData();
+    //     fetchReviewData();
+    //     setLoading(false)
+        
+    // }, [locationId])
+    
     useEffect(() => {
         const fetchLocationData = async () => {
             try {
-                const response = await CoffeeService.getLocationDetails(locationId)
-                const formatted = InfoFormatter.formatLocationResults(response)
-                setLocationInfo(formatted)
+                const response = await CoffeeService.getLocationDetails(locationId);
+                const formatted = InfoFormatter.formatLocationResults(response);
+                return formatted;
             } catch (e) {
-                setLocationInfoError(e.message)
-            } finally {
-                setLoading(false)
+                setLocationInfoError(e.message);
+                return null; 
             }
-        }
+        };
 
         const fetchReviewData = async () => {
             try {
-                const responseData = await ReviewService.getAllLocationReviews(locationId)
-                setReviewData(responseData)
+                const responseData = await ReviewService.getAllLocationReviews(locationId);
+                return responseData;
             } catch (e) {
-                console.log(e)
-            } 
-        }
+                console.log(e);
+                return null;
+            }
+        };
 
-        fetchLocationData();
-        fetchReviewData();
-        
-    }, [locationId])
+        Promise.all([fetchLocationData(), fetchReviewData()]).then(([locationInfo, reviewData]) => {
+            if (locationInfo !== null) {
+                setLocationInfo(locationInfo);
+            }
+            if (reviewData !== null) {
+                setReviewData(reviewData);
+            }
+            setLoading(false);
+        });
+
+    }, [locationId]); 
 
 
    return (
