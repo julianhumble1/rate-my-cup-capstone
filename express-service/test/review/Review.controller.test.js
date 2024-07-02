@@ -221,6 +221,16 @@ describe("Review Controller tests", () => {
             expect(res.status.calledWith(200)).to.be.true;
         })
 
+        it("should respond with 404 status code if request is successful", async () => {
+            // Arrange
+            const error = new Error("Review not found")
+            reviewService.editReview.rejects(error)
+            // Act
+            await reviewController.editReview(req, res)
+            // Assert
+            expect(res.status.calledWith(404)).to.be.true;
+        })
+
     })
 
 })
