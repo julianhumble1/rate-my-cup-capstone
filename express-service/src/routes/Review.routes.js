@@ -1,5 +1,5 @@
 import { Router } from "express";
-import AuthJWT from "../../../user-service/src/middleware/AuthJWT.js";
+import AuthJWT from "../middleware/AuthJWT.js"
 
 import ReviewController from "../controllers/Review.controller.js";
 import ReviewValidator from "../middleware/ReviewValidator.js";
