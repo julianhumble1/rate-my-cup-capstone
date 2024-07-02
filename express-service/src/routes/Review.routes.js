@@ -37,7 +37,8 @@ export default class ReviewRoutes {
 
         this.#router.put(
             "/",
-            [AuthJWT.verifyToken]
+            [AuthJWT.verifyToken, AuthJWT.verifyAuth, ...ReviewValidator.validateNewReview()],
+            this.#controller.editReview
         )
      }
 

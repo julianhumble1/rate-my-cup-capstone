@@ -37,4 +37,19 @@ export default class ReviewController {
         }
     }
 
+    editReview = async (req, res) => {
+        const sentResponse = ReviewValidator.handleValidationErrors(req, res);
+        if (sentResponse) return;
+        try {
+            const updatedReview = await this.#service.editReview(req.body)
+            return res.status(200).json(updatedReview)
+        } catch (e) {
+            if (e.message === "Review not found") {
+                return res.status(404).json(e.message)
+            } else {
+                return res.status(500).json(e.message)
+            }
+        }
+    }
+
 }

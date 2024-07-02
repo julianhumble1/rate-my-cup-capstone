@@ -32,4 +32,29 @@ export default class ReviewService {
             throw new Error("Internal system error")
         }
     }
+
+    editReview = async ({drinkType, rating, price, comment, reviewId}) => {
+        try {
+            const updatedReview = Review.findOneAndUpdate(
+                { _id: reviewId },
+                {$set: {
+                    drinkType: drinkType,
+                    rating: rating,
+                    price: price,
+                    comment: comment    
+                }},
+                { new: true }
+            )
+            if (!updatedReview) {
+                throw new Error("Review not found")
+            }
+            return updatedReview
+        } catch (e) {
+            if (e.message === "Review not found") {
+                throw new Error(e.message) 
+            } else {
+                throw new Error("Internal system error")
+            }
+        }
+    }
 }
