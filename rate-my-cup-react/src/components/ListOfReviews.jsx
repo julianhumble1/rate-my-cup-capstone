@@ -46,7 +46,7 @@ const ListOfReviews = () => {
                 {!(drinkOptions.includes(drinkType)) &&
                     <div>All Reviews</div>
                 }
-                {reviewData.map((review, index) => (
+                {reviewData && reviewData.map((review, index) => (
                     <Review review={review} key={index} />
                 ))
 
