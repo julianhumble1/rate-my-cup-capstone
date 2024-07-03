@@ -14,6 +14,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false)
 
   const handleSearch = async () => {
+    setLoading(true)
     try {
       response = await CoffeeService.locationSearch(postcodeSearch)
       setPostcodeError("")
@@ -23,6 +24,7 @@ const Home = () => {
         setPostcodeError("Invalid postcode. Please ensure postcode is valid before trying again")
       } else setPostcodeError(e.message)
     }
+    setLoading(false)
   }
 
   return (
