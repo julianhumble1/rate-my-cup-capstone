@@ -21,6 +21,25 @@ export default class ReviewService {
         }
     }
 
+    static editReview = async (drinkType, rating, price, comment, reviewId, reviewUserId, token) => {
+        try {
+            await axios.put(`${API_URL}/`, {
+                drinkType: drinkType,
+                rating: rating,
+                price: price,
+                comment: comment,
+                reviewId: reviewId,
+                reviewUserId: reviewUserId
+            }, {
+                headers: {
+                    "x-access-token": token
+                }
+            })
+        } catch (e) {
+            throw new Error(e.response.data)
+        }
+    }
+
     static getAllLocationReviews = async (locationId) => {
         try {
             const reviews = await axios.get(`${API_URL}/location?locationId=${locationId}`)

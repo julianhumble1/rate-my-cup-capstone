@@ -44,9 +44,9 @@ describe("List Of Reviews page tests", () => {
                 <ListOfReviews />
             </MemoryRouter>)
         })
-        const allReviews = screen.getByText("All Reviews")
+        const allRates = screen.getByText("All Rates")
         // Assert
-        expect(allReviews).toBeInTheDocument();
+        expect(allRates).toBeInTheDocument();
     })
 
     // it("should display Latte reviews if drinkType is Latte", async () => {

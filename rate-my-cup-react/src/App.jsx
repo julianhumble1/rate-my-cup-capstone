@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import { BrowserRouter as Router, Route, Routes, Navigate, useParams } from "react-router-dom"
 import NewRate from "./components/NewRate.jsx"
 import ListOfReviews from "./components/ListOfReviews.jsx"
+import EditRate from "./components/EditRate.jsx"
 
 function App() {
 

@@ -41,15 +41,14 @@ const ListOfReviews = () => {
         (!loading && 
             <div className="container rounded text-center fw-bold fs-2 p-0 justify-content-center" id="list-of-reviews-box">
                 {(drinkOptions.includes(drinkType)) &&
-                    <div>{drinkType} Reviews</div>
+                    <div>{drinkType} Rates</div>
                 }
                 {!(drinkOptions.includes(drinkType)) &&
-                    <div>All Reviews</div>
+                    <div>All Rates</div>
                 }
                 {reviewData && reviewData.map((review, index) => (
                     <Review review={review} key={index} />
                 ))
-
                 }
             </div>
         )

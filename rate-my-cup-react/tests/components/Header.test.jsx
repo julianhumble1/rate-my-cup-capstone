@@ -41,6 +41,7 @@ describe("Header tests", () => {
             )
 
             global.localStorage = {
+                getItem: vi.fn(),
                 removeItem: vi.fn()
             }
         })
