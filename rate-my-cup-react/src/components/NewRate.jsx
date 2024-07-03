@@ -34,11 +34,11 @@ const NewRate = () => {
     <div className="rounded-2 text-center justify-content-center p-2" id="new-rate-box">
         {(successfulCreate !== "New Rate successfully created!") && <>  
             <div className="fs-3 fw-bold">New Rate</div>
-            <div className="fw-bold">Location:</div>
+            {/* <div className="fw-bold">Location:</div> */}
             <div className="row justify-content-center align-items-center fw-bold pb-2">
                 <div className="col-6 justify-content-center">
                     {/* <input type="text" className="form-control" placeholder="Location..." onChange={(e) => setLocationId(e.target.value)}/> */}
-                    {locationId}
+                    {/* {locationId} */}
                 </div>    
             </div>
             <div className="row">
