@@ -19,7 +19,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
             <nav className="navbar navbar-expand-md container-fluid" id = "header">
                 <div className="container-fluid">
                     <a className="navbar-brand" href="#">
-                        <img src="coffee-logo.png" alt="Logo" width="60" height="48" />
+                        <img src="slick-coffee-logo.png" alt="Logo" width="60" height="60" />
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
