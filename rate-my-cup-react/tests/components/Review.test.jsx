@@ -85,5 +85,26 @@ describe("review item tests", () => {
             // Assert
             expect(edit).toBeInTheDocument();
         })
+
+        it("should display edit button if local storage role is admin ", async () => {
+            // Arrange
+            global.localStorage.getItem.mockImplementation((key) => {
+                if (key === "role") return "admin";
+                if (key === "id") return "notTestUserId";
+                return null;
+            });
+            InfoFormatter.formatLocationResults.mockReturnValue({"name": "test"})
+            // Act
+            await act(async () => {
+                render(
+                    <MemoryRouter>
+                        <Review review={review} />
+                    </MemoryRouter>
+                )    
+            })
+            const edit = screen.getByText("Edit")
+            // Assert
+            expect(edit).toBeInTheDocument();
+        })
     })
 })
