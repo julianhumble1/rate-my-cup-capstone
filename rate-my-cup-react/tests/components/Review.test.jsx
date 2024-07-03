@@ -20,7 +20,7 @@ describe("review item tests", () => {
 
             vi.mock("../../src/utils/InfoFormatter.js", () => ({
                 default: class {
-                    static formatLocationResults = vi.fn();
+                    static formatLocationResults = vi.fn()
                 }
             }))
 
@@ -37,7 +37,7 @@ describe("review item tests", () => {
             review = {
                 _id: "testID",
                 locationId: "testLocationId",
-                userId: "testReviewId",
+                userId: "testUserId",
                 drinkType: "Latte",
                 rating: 2,
                 price: 3,
@@ -63,6 +63,27 @@ describe("review item tests", () => {
             const edit = screen.queryByText("Edit")
             // Assert
             expect(edit).not.toBeInTheDocument();
+        })
+
+        it("should display edit button if local storage id matches review userID ", async () => {
+            // Arrange
+            global.localStorage.getItem.mockImplementation((key) => {
+                if (key === "role") return "user";
+                if (key === "id") return "testUserId";
+                return null;
+            });
+            InfoFormatter.formatLocationResults.mockReturnValue({"name": "test"})
+            // Act
+            await act(async () => {
+                render(
+                    <MemoryRouter>
+                        <Review review={review} />
+                    </MemoryRouter>
+                )    
+            })
+            const edit = screen.getByText("Edit")
+            // Assert
+            expect(edit).toBeInTheDocument();
         })
     })
 })
