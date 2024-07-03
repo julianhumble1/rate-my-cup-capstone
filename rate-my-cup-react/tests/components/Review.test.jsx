@@ -4,8 +4,11 @@ import InfoFormatter from "../../src/utils/InfoFormatter.js";
 import { MemoryRouter } from "react-router-dom";
 import ReviewService from "../../src/services/ReviewService.js";
 import CoffeeService from "../../src/services/CoffeeService.js";
+import { beforeEach } from "vitest";
+import userEvent from "@testing-library/user-event";
 
 describe("review item tests", () => {
+
 
     describe("initial review display tests", () => {
 
@@ -23,6 +26,7 @@ describe("review item tests", () => {
                     static formatLocationResults = vi.fn()
                 }
             }))
+            InfoFormatter.formatLocationResults.mockReturnValue({"name": "test"})
 
             vi.mock("../../src/service/ReviewService.js", () => ({
                 default: class {
@@ -72,7 +76,6 @@ describe("review item tests", () => {
                 if (key === "id") return "testUserId";
                 return null;
             });
-            InfoFormatter.formatLocationResults.mockReturnValue({"name": "test"})
             // Act
             await act(async () => {
                 render(
@@ -93,7 +96,7 @@ describe("review item tests", () => {
                 if (key === "id") return "notTestUserId";
                 return null;
             });
-            InfoFormatter.formatLocationResults.mockReturnValue({"name": "test"})
+            
             // Act
             await act(async () => {
                 render(
@@ -106,5 +109,73 @@ describe("review item tests", () => {
             // Assert
             expect(edit).toBeInTheDocument();
         })
+    })
+
+    describe("edit review process tests", () => {
+
+        let review;
+
+        beforeEach(() => {
+            vi.mock("../../src/services/CoffeeService.js", () => ({
+                default: class {
+                    static getLocationDetails = vi.fn();
+                }
+            }))
+
+            vi.mock("../../src/utils/InfoFormatter.js", () => ({
+                default: class {
+                    static formatLocationResults = vi.fn()
+                }
+            }))
+            InfoFormatter.formatLocationResults.mockReturnValue({"name": "test"})
+
+            vi.mock("../../src/service/ReviewService.js", () => ({
+                default: class {
+                    static editReview = vi.fn();
+                }
+            }))
+
+            global.localStorage = {
+                getItem: vi.fn(),
+            }
+            
+            review = {
+                _id: "testID",
+                locationId: "testLocationId",
+                userId: "testUserId",
+                drinkType: "Latte",
+                rating: 2,
+                price: 3,
+                comment: "test"
+            }
+        })
+
+        afterEach(() => {
+            vi.restoreAllMocks();
+        })
+
+        it("should display edit options upon pressing edit", async() => {
+            // Arrange
+            global.localStorage.getItem.mockImplementation((key) => {
+                if (key === "role") return "user";
+                if (key === "id") return "testUserId";
+                return null;
+            });
+            await act(async () => {
+                render(
+                    <MemoryRouter>
+                        <Review review={review} />
+                    </MemoryRouter>
+                )    
+            })
+            const edit = screen.getByText("Edit")
+            // Act
+            await userEvent.click(edit)
+            const additionalComments = screen.getByText("Additional Comments")
+            // Assert
+            expect(additionalComments).toBeInTheDocument()
+        })
+
+
     })
 })
