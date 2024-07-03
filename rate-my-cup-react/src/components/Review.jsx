@@ -96,10 +96,10 @@ const Review = ({ review }) => {
                     </div>
                 </>}
                 {successfulEdit === "Rate successfully edited" && 
-                    <div className='text-center text-success'>{ successfulEdit}</div>
+                    <div className='text-center text-success'>{successfulEdit}</div>
                 }
                 {(successfulEdit && (successfulEdit !== "Rate successfully edited")) &&
-                    <div className='text-center text-danger'>{ successfulEdit}</div>
+                    <div className='text-center text-danger'>{successfulEdit}</div>
                 }
             </div>
         </div>
