@@ -1,7 +1,7 @@
 import "../css/Home.css"
 import CoffeeService from "../services/CoffeeService.js"
 import SearchResult from "./SearchResult.jsx"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Home = () => {
 
@@ -15,8 +15,25 @@ const Home = () => {
 
   const [priceFilter, setPriceFilter] = useState("Any")
   const [ratingFilter, setRatingFilter] = useState("Any")
+  const [drinkFilter, setDrinkFilter] = useState("Any")
 
   const drinkOptions = ["Latte", "Espresso", "Americano", "Cappuccino", "Mocha", "Flat White", "Tea", "Other"]
+
+  const handleChangePrice = (event) => {
+    event.preventDefault()
+    setPriceFilter(event.target.value)
+  }
+
+  const handleChangeRating = (event) => {
+    event.preventDefault()
+    setRatingFilter(event.target.value)
+  }
+
+  useEffect(() => {
+    if (priceFilter === "Any" && ratingFilter === "Any") {
+      setDrinkFilter("Any")
+    }
+  }, [priceFilter, ratingFilter])
 
   const handleSearch = async () => {
     setLoading(true)
@@ -50,27 +67,27 @@ const Home = () => {
           </div>
         </div>
         <div className="row pt-3 pt-md-0">
-        <div className="d-none d-md-block col-md-4 ">
-          <label htmlFor="coffee-choice">Drink Type</label>
+          <div className="d-none d-md-block col-md-4">
+            <label htmlFor="min-price-choice">Price</label>
+          </div>
+          <div className="d-none d-md-block col-md-4">
+            <label htmlFor="min-rating-choice">Min Rating</label>
+          </div>
+          <div className="d-none d-md-block col-md-4 ">
+            <label htmlFor="coffee-choice">Drink Type</label>
+          </div>
         </div>
-        <div className="d-none d-md-block col-md-4">
-          <label htmlFor="min-rating-choice">Min Rating</label>
-        </div>
-        <div className="d-none d-md-block col-md-4">
-          <label htmlFor="min-price-choice">Price</label>
-        </div>
-      </div>
         <div className = "row mb-3">
         <div className = "col-12 col-md-4 mb-2 m-md-0">
-          <select className="form-select" id="coffee-choice" defaultValue = "Any">
-            <option value="Any">Any Drink Type</option>
-            {drinkOptions.map((drinkOption, index) => (
-              <option key={index} value={drinkOption}>{drinkOption}</option>
-              ))}
+          <select className="form-select" id="price-rating-choice" defaultValue = "Any" onChange={handleChangePrice}>
+            <option value="Any">Any Price</option>
+            <option value="1">£</option>
+            <option value="2">£/££</option>
+            <option value="3">£/££/£££</option>
           </select>
         </div>
         <div className="col-12 col-md-4 mb-2 m-md-0">
-          <select className="form-select" id="min-rating-choice" defaultValue = "Any" onChange={(e) => setRatingFilter(e.target.value)}>
+          <select className="form-select" id="min-rating-choice" defaultValue = "Any" onChange={handleChangeRating}>
             <option value="Any">Any Rating</option>
             <option value="1">&#9733;</option>
             <option value="2">&#9733;&#9733;</option>
@@ -79,14 +96,15 @@ const Home = () => {
             <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
           </select>
         </div>
-        <div className="col-12 col-md-4 mb-2 m-md-0">
-          <select className="form-select" id="price-rating-choice" defaultValue = "Any" onChange={(e) => setPriceFilter(e.target.value)}>
-            <option value="Any">Any Price</option>
-            <option value="1">£</option>
-            <option value="2">£/££</option>
-            <option value="3">£/££/£££</option>
+          <div className="col-12 col-md-4 mb-2 m-md-0">
+            <select className="form-select" id="coffee-choice" value={drinkFilter} disabled={((ratingFilter !== "Any"|| priceFilter !== "Any") ) ? false : true} onChange={(e)=>setDrinkFilter(e.target.value)}>
+            <option value="Any">Any Drink Type</option>
+            {drinkOptions.map((drinkOption, index) => (
+              <option key={index} value={drinkOption}>{drinkOption}</option>
+              ))}
           </select>
-          </div>
+          
+        </div>
         </div>
         
       </form>
@@ -108,7 +126,7 @@ const Home = () => {
       }
       {locationResults &&
         locationResults.map((locationInfo, index) => (
-          <SearchResult locationInfo={locationInfo} key={index} priceFilter={priceFilter} ratingFilter={ratingFilter} />
+          <SearchResult locationInfo={locationInfo} key={index} priceFilter={priceFilter} ratingFilter={ratingFilter} drinkFilter={drinkFilter}/>
         ))
       }
     </div>

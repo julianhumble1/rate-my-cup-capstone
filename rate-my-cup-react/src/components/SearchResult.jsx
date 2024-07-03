@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import ReviewService from "../services/ReviewService.js"
 import ReviewDataFormatter from "../utils/ReviewDataFormatter.js"
 
-const SearchResult = ({ locationInfo, priceFilter, ratingFilter }) => {
+const SearchResult = ({ locationInfo, priceFilter, ratingFilter, drinkFilter }) => {
 
     const locationId = locationInfo.id
 
@@ -17,10 +17,18 @@ const SearchResult = ({ locationInfo, priceFilter, ratingFilter }) => {
         const fetchReviewData = async () => {
             try {
                 const responseData = await ReviewService.getAllLocationReviews(locationId);
-                const rating = ReviewDataFormatter.calculateAverageRating(responseData)
-                setLocationRating(rating)
-                const price = ReviewDataFormatter.calculateModePrice(responseData)
-                setLocationPrice(price)
+                if (drinkFilter === "Any") {
+                    const rating = ReviewDataFormatter.calculateAverageRating(responseData)
+                    const price = ReviewDataFormatter.calculateModePrice(responseData)
+                    setLocationRating(rating)
+                    setLocationPrice(price)
+                } else {
+                    const drinkReviews = ReviewDataFormatter.arrangeReviewsByDrink(responseData)[drinkFilter]
+                    const rating = ReviewDataFormatter.calculateAverageRating(drinkReviews)
+                    const price = ReviewDataFormatter.calculateModePrice(drinkReviews)
+                    setLocationRating(rating)
+                    setLocationPrice(price)
+                }
             } catch (e) {
                 console.log(e);
                 return null;
@@ -28,19 +36,19 @@ const SearchResult = ({ locationInfo, priceFilter, ratingFilter }) => {
         };
 
         fetchReviewData()
-    }, [locationId])
+    }, [locationId, drinkFilter])
 
     useEffect(() => {
         if (priceFilter === "Any" && ratingFilter === "Any") {
             setMatchesFilters(true)
             return
         }
-        if (locationPrice > priceFilter || locationPrice === 0|| locationRating < ratingFilter) {
+        if (locationPrice > priceFilter || locationPrice === 0 || locationRating < ratingFilter) {
             setMatchesFilters(false)
         } else {
             setMatchesFilters(true)
         }
-    }, [priceFilter, ratingFilter])
+    }, [priceFilter, ratingFilter, locationRating, locationPrice])
 
     return (
     <>
