@@ -35,7 +35,7 @@ const SearchResult = ({ locationInfo, priceFilter, ratingFilter }) => {
             setMatchesFilters(true)
             return
         }
-        if (locationPrice > priceFilter || (locationRating < ratingFilter)) {
+        if (locationPrice > priceFilter || locationPrice === 0|| locationRating < ratingFilter) {
             setMatchesFilters(false)
         } else {
             setMatchesFilters(true)
