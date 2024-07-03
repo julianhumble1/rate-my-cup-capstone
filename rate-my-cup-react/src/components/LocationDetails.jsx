@@ -10,7 +10,7 @@ import DrinkReviewsSummary from "./DrinkReviewsSummary.jsx"
 const LocationDetails = ({loggedIn}) => {
 
     const locationId = useParams().id;
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState("")
 
     const [locationInfo, setLocationInfo] = useState()
     const [locationInfoError, setLocationInfoError] = useState("")
@@ -19,6 +19,7 @@ const LocationDetails = ({loggedIn}) => {
     
     useEffect(() => {
         const fetchLocationData = async () => {
+            setLoading(true)
             try {
                 const response = await CoffeeService.getLocationDetails(locationId);
                 const formatted = InfoFormatter.formatLocationResults(response);
@@ -54,6 +55,9 @@ const LocationDetails = ({loggedIn}) => {
 
    return (
        <div className="container text-center rounded-2 pb-3 justify-content-center" id="location-box">
+           {loading && 
+            <div className="fs-2 fw-bold">Loading...</div>
+           }
            {!loading && <>
                <div className="fs-2 fw-bold">{locationInfo.name}</div>
                {locationInfoError &&
