@@ -18,8 +18,9 @@ const LocationDetails = ({loggedIn}) => {
     const [reviewData, setReviewData] = useState()
     
     useEffect(() => {
+
+
         const fetchLocationData = async () => {
-            setLoading(true)
             try {
                 const response = await CoffeeService.getLocationDetails(locationId);
                 const formatted = InfoFormatter.formatLocationResults(response);

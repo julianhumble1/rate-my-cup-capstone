@@ -11,6 +11,8 @@ const Home = () => {
   const [postcodeSearch, setPostcodeSearch] = useState("")
   const [postcodeError, setPostcodeError] = useState("")
 
+  const [loading, setLoading] = useState(false)
+
   const handleSearch = async () => {
     try {
       response = await CoffeeService.locationSearch(postcodeSearch)
@@ -93,6 +95,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      {loading &&
+      <div>Loading...</div>
+      }
       {locationResults &&
         locationResults.map((locationInfo, index) => (
         <SearchResult locationInfo={locationInfo} key={index} />
