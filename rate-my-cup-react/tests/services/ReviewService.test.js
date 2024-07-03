@@ -66,4 +66,23 @@ describe("Review Service tests", () => {
             
         })
     })
+
+    describe("editReview tests", () => {
+        it("should throw an error when axios request fails", async () => {
+            // Arrange
+            axios.put.mockRejectedValue({
+                response: {
+                    data:"Axios request failed"
+                } 
+                
+            })
+            // Act // Assert
+            try {
+                await ReviewService.editReview("invalidReview");
+                throw new Error("Expected edit to throw an error, but it did not");
+            } catch (error) {
+                expect(error.message).toBe("Axios request failed");
+            }
+        })
+    })
 })
