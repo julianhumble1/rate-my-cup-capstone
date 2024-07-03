@@ -19,6 +19,8 @@ const LocationDetails = ({loggedIn}) => {
     
     useEffect(() => {
 
+        setLoading(true)
+
         const fetchLocationData = async () => {
             try {
                 const response = await CoffeeService.getLocationDetails(locationId);
@@ -47,8 +49,10 @@ const LocationDetails = ({loggedIn}) => {
             if (reviewData !== null) {
                 setReviewData(reviewData);
             }
+        })
+        .finally(() => {
             setLoading(false);
-        });
+        })
 
     }, [locationId]); 
 
