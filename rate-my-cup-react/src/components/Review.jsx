@@ -40,9 +40,13 @@ const Review = ({ review }) => {
     const handleEdit = async (e) => {
         e.preventDefault()
         try {
+            console.log("submitted")
             await ReviewService.editReview(drinkType, rating, price, comment, review._id, review.userId, localStorage.getItem("accessToken"))
+            console.log("successful")
             setSuccessfulEdit("Rate successfully edited")
-        } catch {
+        } catch (e){
+            console.log("failed")
+            console.log(e)
             setSuccessfulEdit(e.message)
         }
     }

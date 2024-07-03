@@ -9,11 +9,9 @@ export default defineConfig({
         setupFiles: ["./tests/config/setup.js"],
         testMatch: ["./tests/**/*.test.jsx$?"],
         globals: true,
+        coverage: {
+            exclude: ['src/App.jsx', 'src/main.jsx', ".eslintrc.cjs"],
+          },
   },
   base: '/',
-  // server: {
-  //   port: 3000,
-  //   open: true,
-  //   historyApiFallback: true, // This handles client-side routing
-  // },
 })
