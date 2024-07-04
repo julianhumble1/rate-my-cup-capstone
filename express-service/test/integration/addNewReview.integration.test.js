@@ -22,7 +22,7 @@ describe("addNewReview integration tests", () => {
     let reviewService;
     let database;
     let request;
-    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNiMjZjMDllOGQyODc4OTFjZWQ5NyIsImlhdCI6MTcxOTkxNDU5NCwiZXhwIjoxNzIwMDAwOTk0fQ.I_sAw98XxWQqapAPs8XozhbCa_TPPNZ9TjimyCwfyKc"
+    const accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ODNiMjZjMDllOGQyODc4OTFjZWQ5NyIsImlhdCI6MTcyMDAxMjM4MiwiZXhwIjoxNzIwMDk4NzgyfQ.bi-pnXYXoGt13V_4lnpHz5Uaepvmw6t6ji2ntrgzl7c"
 
     before(async () => {
         Config.load();
