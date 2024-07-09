@@ -148,3 +148,9 @@ dist
 .DS_Store
 ignore.md
 db-helpers/
+
+# Redundant microservices
+
+coffee-units-service/
+reviews-service/
+user-service/
