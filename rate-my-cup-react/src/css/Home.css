@@ -25,3 +25,12 @@
 #search-by-name-button:hover {
     background-color: #283618;
 }
+
+#use-current-location {
+    background-color: #306387;
+    color: #fefae0
+}
+
+#use-current-location:hover {
+    background-color: #264e6a;
+}
