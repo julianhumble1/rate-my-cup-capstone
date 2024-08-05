@@ -59,6 +59,7 @@ const Home = () => {
     setPostcodeError("")
     try {
       const response = await CoffeeService.searchByCoords()
+      setCurrentLocationError("")
       setLocationResults(response)
     } catch (e) {
       setCurrentLocationError(e.message)
