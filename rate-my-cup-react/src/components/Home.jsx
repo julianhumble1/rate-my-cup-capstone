@@ -17,6 +17,8 @@ const Home = () => {
   const [ratingFilter, setRatingFilter] = useState("Any")
   const [drinkFilter, setDrinkFilter] = useState("Any")
 
+  const [currentLocationError, setCurrentLocationError] = useState("")
+
   const drinkOptions = ["Latte", "Espresso", "Americano", "Cappuccino", "Mocha", "Flat White", "Tea", "Other"]
 
   const handleChangePrice = (event) => {
@@ -37,6 +39,7 @@ const Home = () => {
 
   const handleSearch = async () => {
     setLoading(true)
+    setCurrentLocationError("")
     try {
       response = await CoffeeService.locationSearch(postcodeSearch)
       setPostcodeError("")
@@ -44,7 +47,21 @@ const Home = () => {
     } catch (e) {
       if (e.message === "Request failed with status code 400") {
         setPostcodeError("Invalid postcode. Please ensure postcode is valid before trying again")
-      } else setPostcodeError(e.message)
+      } else {
+        setPostcodeError(e.message) 
+      }
+    }
+    setLoading(false)
+  }
+
+  const handleUseCurrentLocation = async () => {
+    setLoading(true)
+    setPostcodeError("")
+    try {
+      const response = await CoffeeService.searchByCoords()
+      setLocationResults(response)
+    } catch (e) {
+      setCurrentLocationError(e.message)
     }
     setLoading(false)
   }
@@ -53,20 +70,25 @@ const Home = () => {
     <div className = "container text-center rounded-2 pb-3" id="search-box">
       <h1>Find your cup...</h1>
       <div className="row justify-content-center">
-        <div className="col-8 col-md-4 pb-md-4 pb-2">
+        <div className="col-8 col-md-4 pb-2 pb-md-0">
           <input type="text" id="postcode-box" className="form-control" placeholder="Postcode" onChange={(e) => setPostcodeSearch(e.target.value)}/>
         </div>
+         <button type="button" className="btn btn-outline-dark col-6 col-md-4" id="search-button" data-testid="location-search-button" onClick={handleSearch}>Find My Cup by Postcode!</button>
+        {postcodeError && <div className="text-danger">
+          {postcodeError}
+        </div>}
+      </div>
+      <div className="">
+        Or
+      </div>
+      <div className="row justify-content-center">
+        <div className="col-md-3 col-9">
+          <button type="button" className="btn w-100" id="use-current-location" onClick={handleUseCurrentLocation}>Use Current Location</button>
+        </div>
+        {currentLocationError && <div className="text-danger">{ currentLocationError }</div>}
       </div>
       <form>
-        <div className="row justify-content-center pb-2">
-          <div className="col-12 col-md-6 ">
-            <button type="button" className="btn btn-outline-dark col-10 col-md-12" id="search-button" data-testid="location-search-button" onClick={handleSearch}>Find My Cup!</button>
-            {postcodeError && <div className="text-danger">
-              {postcodeError}
-            </div>}
-          </div>
-        </div>
-        <div className="row pt-3 pt-md-0">
+        <div className="row pt-3">
           <div className="d-none d-md-block col-md-4">
             <label htmlFor="min-price-choice">Price</label>
           </div>
@@ -108,19 +130,6 @@ const Home = () => {
         </div>
         
       </form>
-      {/* <div className="row p-4 justify-content-center">
-        <div className="col-md-6 col-12 text-center fs-3 ">
-          Or search for a specific cafe...
-        </div>
-        <div className="col-md-6 col-12 text-center row justify-content-center">
-          <div className="col-md-8 col-12">
-            <input type="text" className="form-control" placeholder="Search..."/>
-          </div>
-          <div className="col-md-4 col-6 pt-2 pt-md-0 justify-content-center">
-            <button className="btn d-block w-100" type="button" id="search-by-name-button">Find My Cup!</button>
-          </div>
-        </div>
-      </div> */}
       {loading &&
       <div>Loading...</div>
       }

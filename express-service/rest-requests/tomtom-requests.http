@@ -17,3 +17,7 @@ https://api.tomtom.com/maps/orbis/places/geocode/TW182df.json?key=sT17166UsrgptI
 ###
 
 https://api.tomtom.com/search/2/place.json?entityId=Q-WhI_pokyksoCGaVEvxaQ&key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&apiVersion=1&openingHours=nextSevenDays
+
+###
+
+https://api.tomtom.com/map/1/tile/basic/main/20/0/0png?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&tileSize=256&&

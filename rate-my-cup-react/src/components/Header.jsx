@@ -27,6 +27,7 @@ const Header = ({loggedIn, setLoggedIn}) => {
                     <div className="collapse navbar-collapse" id="navbarToggler">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
                             <Link to="/home" className="header-link p-2" id="home-link" aria-current="page" href="#">Home</Link>
+                            <Link to="/map" className="header-link p-2">Map</Link>
                         </ul>
                         {!loggedIn && <div className="p-2"><Link to="/login" className=" header-link" id="login-link" aria-current="page" href="#">Login</Link> </div>}
                         {!loggedIn && <div className="p-2"><Link to="/register" className="header-link">Register</Link></div>}
