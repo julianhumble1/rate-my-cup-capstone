@@ -83,7 +83,7 @@ const Home = () => {
       </div>
       <div className="row justify-content-center">
         <div className="col-md-3 col-9">
-          <button type="button" className="btn w-100" id="use-current-location" onClick={handleUseCurrentLocation}>Use Current Location</button>
+          <button type="button" className="btn w-100" id="use-current-location" onClick={handleUseCurrentLocation}>Use Current Location!</button>
         </div>
         {currentLocationError && <div className="text-danger">{ currentLocationError }</div>}
       </div>

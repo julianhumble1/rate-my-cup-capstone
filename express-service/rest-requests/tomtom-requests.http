@@ -21,3 +21,7 @@ https://api.tomtom.com/search/2/place.json?entityId=Q-WhI_pokyksoCGaVEvxaQ&key=s
 ###
 
 https://api.tomtom.com/map/1/tile/basic/main/20/0/0png?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&tileSize=256&&
+
+###
+
+https://api.tomtom.com/search/2/nearbySearch/.json?key=sT17166UsrgptIJQcPeXqLcIb6EgnlNe&lat=51.43209650975175&lon=-0.5030673590536578
