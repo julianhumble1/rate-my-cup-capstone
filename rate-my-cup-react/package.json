@@ -12,6 +12,7 @@
     "coverage": "vitest --coverage --mode testing"
   },
   "dependencies": {
+    "@tomtom-international/web-sdk-maps": "^6.25.0",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",

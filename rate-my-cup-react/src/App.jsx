@@ -3,6 +3,7 @@ import Registration from "./components/Registration.jsx"
 import Header from "./components/Header.jsx"
 import Login from "./components/Login.jsx"
 import Home from "./components/Home.jsx"
+import Map from "./components/Map.jsx"
 import LocationDetails from "./components/LocationDetails.jsx"
 import { useEffect, useState } from "react"
 
@@ -44,7 +45,10 @@ function App() {
         <Route
           path="/home"
           element={<Home />}
-          
+        />
+        <Route
+          path="/map"
+          element={<Map />}
         />
         <Route
           path="/location/:id"
