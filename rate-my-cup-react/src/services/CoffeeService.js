@@ -17,8 +17,6 @@ export default class CoffeeService {
     static searchByCoords = async () => {
         try {
             const coords = await this.getCoords()
-            console.log(`The coordinates are ${coords}`)
-            console.log(`X: ${coords[0]}`)
             const response = await axios.get(`https://api.tomtom.com/search/2/categorySearch/.json?key=${TOMTOM_API_KEY}&geobias=point:${coords[0]},${coords[1]}&limit=30&categorySet=9376002,9376006,9361018`)
             const formattedLocationList = this.formatLocationList(response.data.results)
             return formattedLocationList
